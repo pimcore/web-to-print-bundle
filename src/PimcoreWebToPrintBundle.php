@@ -45,9 +45,6 @@ class PimcoreWebToPrintBundle extends AbstractPimcoreBundle implements PimcoreBu
         ];
     }
 
-    /**
-     * @return Installer
-     */
     public function getInstaller(): Installer
     {
         return $this->container->get(Installer::class);
@@ -58,3 +55,4 @@ class PimcoreWebToPrintBundle extends AbstractPimcoreBundle implements PimcoreBu
         return \dirname(__DIR__);
     }
 }
+

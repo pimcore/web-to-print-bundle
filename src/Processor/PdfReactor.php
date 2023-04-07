@@ -40,7 +40,6 @@ class PdfReactor extends Processor
      */
     protected function getConfig(object $config): array
     {
-        $config = (object)$config;
         $web2PrintConfig = Config::getWeb2PrintConfig();
         $reactorConfig = [
             'document' => '',
@@ -230,3 +229,4 @@ class PdfReactor extends Processor
         include_once(__DIR__ . '/Api/PDFreactor.class.php');
     }
 }
+
