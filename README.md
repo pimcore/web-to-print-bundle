@@ -38,4 +38,4 @@ You can also use the following command to clean up you database. Create a backup
 
 ## Contributing and Development
 
-For details see our [Contributing guide](./CONTRIBUTING.md).
+For details see our [Contributing guide](https://github.com/pimcore/web-to-print-bundle/blob/1.x/CONTRIBUTING.md).
