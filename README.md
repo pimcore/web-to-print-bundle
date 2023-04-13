@@ -34,7 +34,7 @@ Uninstalling the bundle does not clean up `printpages` or `printcontainers`. Bef
 You can also use the following command to clean up you database. Create a backup before executing the command. All data will be lost.
 
 ```bash
- bin/console pimcore:document:cleanup printpage printcontainer
+ bin/console pimcore:document:cleanup printpage printcontainerfff
 ```
 
 ### Best Practice
