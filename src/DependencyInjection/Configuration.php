@@ -34,7 +34,6 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->getRootNode();
         $rootNode->addDefaultsIfNotSet();
 
-        // @phpstan-ignore-next-line
         $rootNode
             ->children()
                 ->scalarNode('pdf_creation_php_memory_limit')
