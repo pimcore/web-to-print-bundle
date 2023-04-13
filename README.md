@@ -1,4 +1,9 @@
-# Pimcore Web to Print Bundle
+---
+title: Web to Print Module
+---
+
+
+# Pimcore Web to Print Module
 
 Adds the ability to create web-to-print documents in Pimcore and to convert them into a PDF.
 
