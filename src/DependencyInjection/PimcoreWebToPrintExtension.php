@@ -17,6 +17,7 @@ declare(strict_types=1);
 namespace Pimcore\Bundle\WebToPrintBundle\DependencyInjection;
 
 use Pimcore\Bundle\CoreBundle\DependencyInjection\ConfigurationHelper;
+use Pimcore\Config\LocationAwareConfigRepository;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
@@ -50,17 +51,6 @@ final class PimcoreWebToPrintExtension extends ConfigurableExtension implements 
 
     public function prepend(ContainerBuilder $container): void
     {
-        $containerConfig = ConfigurationHelper::getConfigNodeFromSymfonyTree($container, 'pimcore_web_to_print');
-        $configDir = $containerConfig['config_location']['web_to_print']['write_target']['options']['directory'];
-        $configLoader = new YamlFileLoader(
-            $container,
-            new FileLocator($configDir)
-        );
-
-        //load configs
-        $configs = ConfigurationHelper::getSymfonyConfigFiles($configDir);
-        foreach ($configs as $config) {
-            $configLoader->load($config);
-        }
+        LocationAwareConfigRepository::loadSymfonyConfigFiles($container, 'pimcore_web_to_print', 'web_to_print');
     }
 }
