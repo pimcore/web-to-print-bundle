@@ -1,0 +1,6 @@
+parameters:
+	ignoreErrors:
+
+	excludePaths:
+		- '**/Processor/PdfReactor.php'
+		- '**/PDFreactor.class.php'

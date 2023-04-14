@@ -197,4 +197,3 @@ class PrintCatalogExtension extends AbstractExtension
         return urlencode(str_replace($search, $replace, $text));
     }
 }
-
