@@ -44,7 +44,15 @@ jobs:
                     - 33006:3306
                 env:
                     MYSQL_ALLOW_EMPTY_PASSWORD: yes
+            chrome:
+                image: browserless/chrome
+                ports:
+                    - "3000:3000"
 
+            gotenberg:
+                image: gotenberg/gotenberg:7
+                ports:
+                    - "3001:3001"
         steps:
             - name: "Checkout code"
               uses: "actions/checkout@v2"
