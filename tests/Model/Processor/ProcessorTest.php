@@ -14,9 +14,8 @@ declare(strict_types=1);
  *  @license    http://www.pimcore.org/license     GPLv3 and PCL
  */
 
-namespace Pimcore\Tests\Model\Document;
+namespace Pimcore\Bundle\WebToPrintBundle\Tests\Model\Processor;
 
-use Pimcore\Bundle\WebToPrintBundle\Config;
 use Pimcore\Bundle\WebToPrintBundle\Processor;
 use Pimcore\Bundle\WebToPrintBundle\Processor\Chromium;
 use Pimcore\Bundle\WebToPrintBundle\Processor\Gotenberg;

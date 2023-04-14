@@ -14,7 +14,7 @@ declare(strict_types=1);
  *  @license    http://www.pimcore.org/license     GPLv3 and PCL
  */
 
-namespace Pimcore\Tests\Model\Document;
+namespace Pimcore\Bundle\WebToPrintBundle\Tests\Model\Document;
 
 use Pimcore\Bundle\WebToPrintBundle\Model\Document\Printcontainer;
 use Pimcore\Bundle\WebToPrintBundle\Model\Document\Printpage;
