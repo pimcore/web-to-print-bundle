@@ -15,6 +15,11 @@
     "require": {
         "pimcore/pimcore": "^11.0"
     },
+    "require-dev": {
+      "codeception/codeception": "^5.0.3",
+      "codeception/module-symfony": "^3.1.0",
+      "codeception/phpunit-wrapper": "^9"
+    },
     "autoload": {
         "psr-4": {
             "Pimcore\\Bundle\\WebToPrintBundle\\": "src/"
