@@ -14,9 +14,15 @@
 
 namespace App;
 
+use Pimcore\Bundle\AdminBundle\PimcoreAdminBundle;
+use Pimcore\HttpKernel\BundleCollection\BundleCollection;
 use Pimcore\Kernel as BaseKernel;
 
 class Kernel extends BaseKernel
 {
-
+    public function registerBundlesToCollection(BundleCollection $collection): void
+    {
+        // pimcore bundles
+        $collection->addBundle(new PimcoreAdminBundle(), 60);
+    }
 }
