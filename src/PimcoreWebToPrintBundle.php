@@ -55,4 +55,3 @@ class PimcoreWebToPrintBundle extends AbstractPimcoreBundle implements PimcoreBu
         return \dirname(__DIR__);
     }
 }
-
