@@ -36,7 +36,7 @@ class DocumentTest extends ModelTestCase
     public function testPrintContainer(): void
     {
         // create
-        $this->testPrintContainer = TestHelper::createEmptyDocument('', true, true, '\\Pimcore\\Model\\Document\\Printcontainer');
+        $this->testPrintContainer = TestHelper::createEmptyDocument('', true, true, '\\Pimcore\\Bundle\\WebToPrintBundle\\Model\\Document\\Printcontainer');
         $this->assertInstanceOf(Printcontainer::class, $this->testPrintContainer);
 
         $this->testPrintContainer = Printcontainer::getById($this->testPrintContainer->getId(), ['force' => true]);
@@ -53,7 +53,7 @@ class DocumentTest extends ModelTestCase
     public function testPrintPage(): void
     {
         // create
-        $this->testprintPage = TestHelper::createEmptyDocument('', true, true, '\\Pimcore\\Model\\Document\\printPage');
+        $this->testprintPage = TestHelper::createEmptyDocument('', true, true, '\\Pimcore\\Bundle\\WebToPrintBundle\\Model\\Document\\Printpage');
         $this->assertInstanceOf(PrintPage::class, $this->testprintPage);
 
         $this->testprintPage = PrintPage::getById($this->testprintPage->getId(), ['force' => true]);

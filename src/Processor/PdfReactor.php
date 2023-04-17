@@ -72,8 +72,8 @@ class PdfReactor extends Processor
         $web2PrintConfig = Config::getWeb2PrintConfig();
         $this->includeApi();
 
-        $port = ($web2PrintConfig['pdfreactorServerPort']) ? (string)$web2PrintConfig['pdfreactorServerPort'] : '9423';
-        $protocol = ($web2PrintConfig['pdfreactorProtocol']) ? (string)$web2PrintConfig['pdfreactorProtocol'] : 'http';
+        $port = (string) ($web2PrintConfig['pdfreactorServerPort'] ?? '9423');
+        $protocol = (string) ($web2PrintConfig['pdfreactorProtocol'] ?? 'http');
 
         $pdfreactor = new \com\realobjects\pdfreactor\webservice\client\PDFreactor($protocol . '://' . $web2PrintConfig['pdfreactorServer'] . ':' . $port . '/service/rest');
 

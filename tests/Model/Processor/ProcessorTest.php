@@ -22,44 +22,54 @@ use Pimcore\Bundle\WebToPrintBundle\Processor\Gotenberg;
 use Pimcore\Bundle\WebToPrintBundle\Processor\PdfReactor;
 use Pimcore\Logger;
 use Pimcore\Tests\Support\Test\ModelTestCase;
+use Pimcore\Tests\Support\Util\TestHelper;
 use Pimcore\Tool\Console;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
 class ProcessorTest extends ModelTestCase
 {
-    public function testProcessors(): void
+
+    public function testGotenberg()
     {
-        $params = [];
+        $this->checkProcessors('Gotenberg', []);
+    }
+    public function testChromium()
+    {
+        $this->checkProcessors('Chromium', []);
+    }
 
-        // PDF Reactor
-        $params['adapterConfig'] = [
-            'javaScriptMode' => 0,
-            'addLinks' => true,
-            'appendLog' => true,
-            'enableDebugMode' => true,
+    public function testPdfReactor()
+    {
+        $pdfReactorConfig = [
+            'adapterConfig' => [
+                'javaScriptMode' => 0,
+                'addLinks' => true,
+                'appendLog' => true,
+                'enableDebugMode' => true
+            ]
         ];
-        $pdfContent = $this->getPDFfromProcessor(new PdfReactor(), $params);
+        $this->checkProcessors('PdfReactor', $pdfReactorConfig);
+    }
 
-        // Gotenberg
-        $params = [];
-        $pdfContent = $this->getPDFfromProcessor(new Gotenberg(), $params);
+    public function checkProcessors(string $processorName, array $config): void
+    {
 
-        // Chromium
-        $params = [];
-        $pdfContent = $this->getPDFfromProcessor(new Chromium(), $params);
+        $processorClass = 'Pimcore\Bundle\WebToPrintBundle\Processor\\'.$processorName;
+        $processor = new $processorClass();
+        $pdfContent = $this->getPDFfromProcessor($processor, $config);
 
         $file = tmpfile();
         $tempMetadata = stream_get_meta_data($file);
         $tempPath = $tempMetadata['uri'];
         file_put_contents($tempPath, $pdfContent);
-        $this->getPDFInfo($tempPath);
+        $pdfInfo = $this->getPDFInfo($tempPath);
+        $this->debug($pdfInfo);
     }
 
     private function getPDFfromProcessor(Processor $processor, array $config): string
     {
-        $response = $this->render('@PimcoreWebToPrint/settings/test_web2print.html.twig');
-        $html = $response->getContent();
+        $html =  file_get_contents(__DIR__.'/../../Support/Resources/test_web2print.html.twig');
         return $processor->getPdfFromString($html, $config);
     }
 

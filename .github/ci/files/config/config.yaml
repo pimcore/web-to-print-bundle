@@ -1,3 +1,7 @@
+imports:
+    - { resource: services.yaml }
+    - { resource: system.yml }
+
 pimcore:
     chromium:
         uri: 'ws://chrome:3000/'
@@ -42,6 +46,21 @@ pimcore:
                 type: 'settings-store'
             read_target:
                 type: 'settings-store'
+
+    documents:
+        type_definitions:
+            map:
+                printpage:
+                    class: Pimcore\Bundle\WebToPrintBundle\Model\Document\Printpage
+                    children_supported: false
+                    direct_route: true
+                    predefined_document_types: true
+                printcontainer:
+                    class: Pimcore\Bundle\WebToPrintBundle\Model\Document\Printcontainer
+                    only_printable_childrens: true
+                    direct_route: true
+                    predefined_document_types: true
+
 pimcore_admin:
     config_location:
         admin_system_settings:
@@ -49,3 +68,5 @@ pimcore_admin:
                 type: 'settings-store'
             read_target:
                 type: 'settings-store'
+
+
