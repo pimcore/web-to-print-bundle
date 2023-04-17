@@ -5,8 +5,8 @@ parameters:
     bootstrapFiles:
         - phpstan-bootstrap.php
     excludePaths:
-	    - '**/Processor/PdfReactor.php'
-	    - '**/PDFreactor.class.php'
+        - '**/Processor/PdfReactor.php'
+        - '**/PDFreactor.class.php'
     checkGenericClassInNonGenericObjectType: false
     checkMissingIterableValueType: false
 
