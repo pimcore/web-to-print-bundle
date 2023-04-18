@@ -4,10 +4,10 @@ imports:
 
 pimcore:
     chromium:
-        uri: 'ws://chrome:3000/'
+        uri: '%env(PIMCORE_TEST_CHROMIUM_DNS)%'
 
     gotenberg:
-        base_url: 'gotenberg:3001'
+        base_url: '%env(PIMCORE_TEST_GOTENBERG_DNS)%'
 
     email:
         sender:

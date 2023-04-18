@@ -24,12 +24,12 @@ class ConfigTest extends ModelTestCase
 {
     public function testConfig(){
         $config = Config::get();
-
-        print_r($config);
+        $this->assertFalse(isset($config['pdfreactorServer']),  'Check if pdfreactorServer config is undefined');
 
         $config['pdfreactorServer'] = 'cloud.pdfreactor.com';
         $config['pdfreactorProtocol'] = 'https';
         $config['pdfreactorServerPort'] = '443';
+        $config['pdfreactorApiKey'] = '';
 
         Config::save($config);
         $config = Config::get();

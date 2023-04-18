@@ -1,6 +1,8 @@
 <?php
 
+use Pimcore\Bundle\WebToPrintBundle\PimcoreWebToPrintBundle;
+
 return [
     'Pimcore\\Bundle\\AdminBundle\\PimcoreAdminBundle' => ['all' => true],
-    'Pimcore\Bundle\WebToPrintBundle\PimcoreWebToPrintBundle' => ['all' => true]
+    PimcoreWebToPrintBundle::class => ['all' => true]
 ];

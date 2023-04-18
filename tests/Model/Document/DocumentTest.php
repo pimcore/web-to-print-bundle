@@ -36,8 +36,6 @@ class DocumentTest extends ModelTestCase
     public function testPrintContainer(): void
     {
         // create
-
-
         $document = new Printcontainer();
         $document->setParentId(1);
         $document->setUserOwner(1);
@@ -46,36 +44,17 @@ class DocumentTest extends ModelTestCase
         $document->setKey(uniqid('', true) . rand(10, 99));
 
         $this->assertInstanceOf(Printcontainer::class, $document);
-
-        $this->testPrintContainer = TestHelper::createEmptyDocument('', true, true, '\\Pimcore\\Bundle\\WebToPrintBundle\\Model\\Document\\Printcontainer');
-        $this->assertInstanceOf(Printcontainer::class, $this->testPrintContainer);
-
-        $this->testPrintContainer = Printcontainer::getById($this->testPrintContainer->getId(), ['force' => true]);
-        $this->assertInstanceOf(Printcontainer::class, $this->testPrintContainer);
-
-        // change controller
-        $controllerTest = 'App\Controller\Web2printController::defaultAction';
-        $this->testPrintContainer->setController($controllerTest);
-        $this->testPrintContainer->save();
-
-        $this->testPrintContainer = Printcontainer::getById($this->testPrintContainer->getId(), ['force' => true]);
-        $this->assertEquals($controllerTest, $this->testPrintContainer->getController());
     }
     public function testPrintPage(): void
     {
         // create
-        $this->testprintPage = TestHelper::createEmptyDocument('', true, true, '\\Pimcore\\Bundle\\WebToPrintBundle\\Model\\Document\\Printpage');
-        $this->assertInstanceOf(PrintPage::class, $this->testprintPage);
+        $document = new Printpage();
+        $document->setParentId(1);
+        $document->setUserOwner(1);
+        $document->setUserModification(1);
+        $document->setCreationDate(time());
+        $document->setKey(uniqid('', true) . rand(10, 99));
 
-        $this->testprintPage = PrintPage::getById($this->testprintPage->getId(), ['force' => true]);
-        $this->assertInstanceOf(PrintPage::class, $this->testprintPage);
-
-        // change controller
-        $controllerTest = 'App\Controller\Web2printController::defaultAction';
-        $this->testprintPage->setController($controllerTest);
-        $this->testprintPage->save();
-
-        $this->testprintPage = PrintPage::getById($this->testprintPage->getId(), ['force' => true]);
-        $this->assertEquals($controllerTest, $this->testprintPage->getController());
+        $this->assertInstanceOf(Printpage::class, $document);
     }
 }

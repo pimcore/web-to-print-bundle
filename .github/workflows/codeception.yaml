@@ -18,6 +18,8 @@ env:
     PIMCORE_TEST: 1
     #    PIMCORE_TEST_DB_DSN: "mysql://root@127.0.0.1:33006/pimcore_test"
     PIMCORE_TEST_REDIS_DSN: "redis://127.0.0.1:63379"
+    PIMCORE_TEST_CHROMIUM_DNS: 'ws://127.0.0.1:30000/'
+    PIMCORE_TEST_GOTENBERG_DNS: 'http://127.0.0.1:31234'
 
 jobs:
     codeception-tests:
@@ -47,12 +49,12 @@ jobs:
             chrome:
                 image: browserless/chrome
                 ports:
-                    - "3000:3000"
+                    - "30000:3000"
 
             gotenberg:
                 image: gotenberg/gotenberg:7
                 ports:
-                    - "3001:3001"
+                    - "31234:3123"
         steps:
             - name: "Checkout code"
               uses: "actions/checkout@v2"
@@ -64,6 +66,11 @@ jobs:
                   extensions: imagick
                   ini-values: display_errors=On, display_startup_errors=On, error_reporting=32767
                   php-version: "${{ matrix.php-version }}"
+
+            - name: "Install Ghostscript and PDFInfo"
+              run: |
+                  sudo apt-get update
+                  sudo apt-get install -y ghostscript poppler-utils
 
             - name: Verify MariaDB connection
               run: |
@@ -100,6 +107,10 @@ jobs:
             - name: "Sync Metadata Storage"
               run: |
                   bin/console doctrine:migrations:sync-metadata-storage -vvv
+
+            - name: Sleep for 60 seconds
+              run: sleep 30s
+              shell: bash
 
             - name: "Run Codeception"
               run: "vendor/bin/codecept run -c . -vvv --xml"

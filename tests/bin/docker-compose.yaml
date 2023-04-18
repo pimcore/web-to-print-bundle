@@ -37,3 +37,13 @@ services:
             - /var/www/html/src
             - /var/www/html/public
             - /var/www/html/var
+
+    chrome:
+        image: browserless/chrome
+        ports:
+            - "3000:3000"
+
+    gotenberg:
+        image: gotenberg/gotenberg:7
+        ports:
+            - "3001:3001"

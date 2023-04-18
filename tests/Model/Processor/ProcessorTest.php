@@ -16,31 +16,60 @@ declare(strict_types=1);
 
 namespace Pimcore\Bundle\WebToPrintBundle\Tests\Model\Processor;
 
+use Gotenberg\Gotenberg as GotenbergAPI;
+use Gotenberg\Stream;
+use Pimcore\Bundle\WebToPrintBundle\Config;
 use Pimcore\Bundle\WebToPrintBundle\Processor;
 use Pimcore\Bundle\WebToPrintBundle\Processor\Chromium;
 use Pimcore\Bundle\WebToPrintBundle\Processor\Gotenberg;
 use Pimcore\Bundle\WebToPrintBundle\Processor\PdfReactor;
+use Pimcore\Document\Adapter\Ghostscript;
 use Pimcore\Logger;
 use Pimcore\Tests\Support\Test\ModelTestCase;
-use Pimcore\Tests\Support\Util\TestHelper;
 use Pimcore\Tool\Console;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
 class ProcessorTest extends ModelTestCase
 {
+    public function testGotenbergCurl3()
+    {
+        $chromium = GotenbergAPI::chromium('http://0.0.0.0:31234');
+        $tempFileName = uniqid('web2print_', true);
+        $request = $chromium->outputFilename($tempFileName)->html(Stream::string('processor.html', '<html><body>test</body></html>'));
+        try {
+            $filename = GotenbergAPI::save($request, PIMCORE_SYSTEM_TEMP_DIRECTORY);
+            $filename = PIMCORE_SYSTEM_TEMP_DIRECTORY . DIRECTORY_SEPARATOR . $filename;
+        } catch (\Exception $e) {
+            $this->assertFalse($e, 'Check');
+        }
+        $this->assertEquals('landscape', $filename, 'Check if pdf is in landscape orientation');
+    }
 
     public function testGotenberg()
     {
         $this->checkProcessors('Gotenberg', []);
+        $this->checkProcessors('Gotenberg', ['landscape' => true]);
     }
     public function testChromium()
     {
         $this->checkProcessors('Chromium', []);
+        $this->checkProcessors('Chromium', ['landscape' => true]);
     }
 
     public function testPdfReactor()
     {
+        $config = Config::getWeb2PrintConfig();
+        $config['pdfreactorServer'] = 'cloud.pdfreactor.com';
+        $config['pdfreactorProtocol'] = 'https';
+        $config['pdfreactorServerPort'] = '443';
+        $config['pdfreactorApiKey'] = '';
+        $config['pdfreactorLicence'] = '';
+        $config['pdfreactorBaseUrl'] = '';
+        $config['pdfreactorEnableDebugMode'] = true;
+        $config['pdfreactorEnableLenientHttpsMode'] = true;
+        Config::setWeb2PrintConfig($config);
+
         $pdfReactorConfig = [
             'adapterConfig' => [
                 'javaScriptMode' => 0,
@@ -63,8 +92,20 @@ class ProcessorTest extends ModelTestCase
         $tempMetadata = stream_get_meta_data($file);
         $tempPath = $tempMetadata['uri'];
         file_put_contents($tempPath, $pdfContent);
+
+        $gs = new Ghostscript();
+        $pdfText = $gs->getText(null, null, $tempPath);
+        $this->assertStringContainsString('Pellentesque habitant morbi tristiqu', $pdfText, 'Check if pdf contains text from html template');
+
         $pdfInfo = $this->getPDFInfo($tempPath);
-        $this->debug($pdfInfo);
+        $orientation = $this->getOrientationFromPDFInfo($pdfInfo);
+
+        if (isset($config['landscape']) && $config['landscape'] == 'true') {
+            $this->assertEquals('landscape', $orientation, 'Check if pdf is in landscape orientation');
+        } else {
+            $this->assertEquals('portrait', $orientation, 'Check if pdf is in portrait orientation');
+        }
+
     }
 
     private function getPDFfromProcessor(Processor $processor, array $config): string
@@ -77,7 +118,7 @@ class ProcessorTest extends ModelTestCase
     {
         try {
             $cmd = [$this->getPdfInfoCli()];
-            array_push($cmd, $assetPath, '-');
+            array_push($cmd, $assetPath);
             Console::addLowProcessPriority($cmd);
             $process = new Process($cmd);
             $process->setTimeout(120);
@@ -92,4 +133,17 @@ class ProcessorTest extends ModelTestCase
     {
         return Console::getExecutable('pdfinfo', true);
     }
+
+    private function getOrientationFromPDFInfo(string $pdfInfo): string
+    {
+        preg_match('/Page size:\s+([0-9]{0,5}\.?[0-9]{0,3}) x ([0-9]{0,5}\.?[0-9]{0,3})/', $pdfInfo, $pagesizematches);
+        $width = round($pagesizematches[1]/2.83);
+        $height = round($pagesizematches[2]/2.83);
+        if ($width > $height) {
+            return 'landscape';
+        } else {
+            return 'portrait';
+        }
+    }
+
 }
