@@ -25,4 +25,19 @@ Thumbs.db
 # NetBeans
 nbproject
 
-node_modules/
+# Test env
+/bin
+/cache
+/config
+/kernel
+/public
+/templates
+/var
+/vendor
+
+/node_modules
+
+/.env
+/.htaccess
+/auth.json
+/config.json

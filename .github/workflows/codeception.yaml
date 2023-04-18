@@ -54,7 +54,7 @@ jobs:
             gotenberg:
                 image: gotenberg/gotenberg:7
                 ports:
-                    - "31234:3123"
+                    - "31234:3000"
         steps:
             - name: "Checkout code"
               uses: "actions/checkout@v2"

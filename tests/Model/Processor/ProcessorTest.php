@@ -32,34 +32,6 @@ use Symfony\Component\Process\Process;
 
 class ProcessorTest extends ModelTestCase
 {
-
-    public function testGotenbergCurl()
-    {
-        $chromium = GotenbergAPI::chromium('http://localhost:31234');
-        $tempFileName = uniqid('web2print_', true);
-        $request = $chromium->outputFilename($tempFileName)->html(Stream::string('processor.html', '<html><body>test</body></html>'));
-        try {
-            $filename = GotenbergAPI::save($request, PIMCORE_SYSTEM_TEMP_DIRECTORY);
-            $filename = PIMCORE_SYSTEM_TEMP_DIRECTORY . DIRECTORY_SEPARATOR . $filename;
-        } catch (\Exception $e) {
-            $this->assertFalse($e, 'Check');
-        }
-        $this->assertEquals('landscape', $filename, 'Check if pdf is in landscape orientation');
-    }
-    public function testGotenbergCurl3()
-    {
-        $chromium = GotenbergAPI::chromium('http://0.0.0.0:31234');
-        $tempFileName = uniqid('web2print_', true);
-        $request = $chromium->outputFilename($tempFileName)->html(Stream::string('processor.html', '<html><body>test</body></html>'));
-        try {
-            $filename = GotenbergAPI::save($request, PIMCORE_SYSTEM_TEMP_DIRECTORY);
-            $filename = PIMCORE_SYSTEM_TEMP_DIRECTORY . DIRECTORY_SEPARATOR . $filename;
-        } catch (\Exception $e) {
-            $this->assertFalse($e, 'Check');
-        }
-        $this->assertEquals('landscape', $filename, 'Check if pdf is in landscape orientation');
-    }
-
     public function testGotenberg()
     {
         $this->checkProcessors('Gotenberg', []);

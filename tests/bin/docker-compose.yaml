@@ -25,6 +25,8 @@ services:
             PIMCORE_TEST: 1
             PIMCORE_TEST_DB_DSN: "mysql://pimcore:pimcore@db:3306/pimcore_test"
             PIMCORE_TEST_REDIS_DSN: "redis://redis:6379"
+            PIMCORE_TEST_GOTENBERG_DNS: "http://gotenberg:3000"
+            PIMCORE_TEST_CHROMIUM_DNS: "ws://chrome:3000/"
         depends_on:
             - db
         volumes:
@@ -34,16 +36,11 @@ services:
             - /var/www/html/config
             - /var/www/html/templates
             - /var/www/html/bin
-            - /var/www/html/src
             - /var/www/html/public
             - /var/www/html/var
 
     chrome:
         image: browserless/chrome
-        ports:
-            - "3000:3000"
 
     gotenberg:
         image: gotenberg/gotenberg:7
-        ports:
-            - "3001:3001"
