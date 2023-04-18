@@ -108,9 +108,5 @@ jobs:
               run: |
                   bin/console doctrine:migrations:sync-metadata-storage -vvv
 
-            - name: Sleep for 60 seconds
-              run: sleep 30s
-              shell: bash
-
             - name: "Run Codeception"
               run: "vendor/bin/codecept run -c . -vvv --xml"
