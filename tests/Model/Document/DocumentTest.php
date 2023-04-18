@@ -36,6 +36,17 @@ class DocumentTest extends ModelTestCase
     public function testPrintContainer(): void
     {
         // create
+
+
+        $document = new Printcontainer();
+        $document->setParentId(1);
+        $document->setUserOwner(1);
+        $document->setUserModification(1);
+        $document->setCreationDate(time());
+        $document->setKey(uniqid('', true) . rand(10, 99));
+
+        $this->assertInstanceOf(Printcontainer::class, $document);
+
         $this->testPrintContainer = TestHelper::createEmptyDocument('', true, true, '\\Pimcore\\Bundle\\WebToPrintBundle\\Model\\Document\\Printcontainer');
         $this->assertInstanceOf(Printcontainer::class, $this->testPrintContainer);
 

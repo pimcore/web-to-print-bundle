@@ -24,7 +24,8 @@ class ConfigTest extends ModelTestCase
 {
     public function testConfig(){
         $config = Config::get();
-        $this->debug($config);
+
+        print_r($config);
 
         $config['pdfreactorServer'] = 'cloud.pdfreactor.com';
         $config['pdfreactorProtocol'] = 'https';
