@@ -17,7 +17,6 @@ declare(strict_types=1);
 namespace Pimcore\Bundle\WebToPrintBundle\Tests\Model\Config;
 
 use Pimcore\Tests\Support\Test\ModelTestCase;
-use Pimcore\Tests\Support\Util\TestHelper;
 use Pimcore\Bundle\WebToPrintBundle\Config;
 
 class ConfigTest extends ModelTestCase

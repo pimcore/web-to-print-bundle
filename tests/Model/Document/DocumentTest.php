@@ -18,7 +18,11 @@ namespace Pimcore\Bundle\WebToPrintBundle\Tests\Model\Document;
 
 use Pimcore\Bundle\WebToPrintBundle\Model\Document\Printcontainer;
 use Pimcore\Bundle\WebToPrintBundle\Model\Document\Printpage;
+use Pimcore\Model\Document;
+use Pimcore\Tests\Support\Helper\Pimcore;
 use Pimcore\Tests\Support\Test\ModelTestCase;
+
+use Pimcore\Bundle\AdminBundle\System\Config;
 use Pimcore\Tests\Support\Util\TestHelper;
 
 /**
@@ -42,7 +46,9 @@ class DocumentTest extends ModelTestCase
         $document->setUserModification(1);
         $document->setCreationDate(time());
         $document->setKey(uniqid('', true) . rand(10, 99));
+        $document->save();
 
+        $document = Document::getById($document->getId());
         $this->assertInstanceOf(Printcontainer::class, $document);
     }
     public function testPrintPage(): void
@@ -54,7 +60,9 @@ class DocumentTest extends ModelTestCase
         $document->setUserModification(1);
         $document->setCreationDate(time());
         $document->setKey(uniqid('', true) . rand(10, 99));
+        $document->save();
 
+        $document = Document::getById($document->getId());
         $this->assertInstanceOf(Printpage::class, $document);
     }
 }

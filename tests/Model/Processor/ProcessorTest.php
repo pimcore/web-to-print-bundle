@@ -16,8 +16,6 @@ declare(strict_types=1);
 
 namespace Pimcore\Bundle\WebToPrintBundle\Tests\Model\Processor;
 
-use Gotenberg\Gotenberg as GotenbergAPI;
-use Gotenberg\Stream;
 use Pimcore\Bundle\WebToPrintBundle\Config;
 use Pimcore\Bundle\WebToPrintBundle\Processor;
 use Pimcore\Bundle\WebToPrintBundle\Processor\Chromium;
@@ -34,12 +32,12 @@ class ProcessorTest extends ModelTestCase
 {
     public function testGotenberg()
     {
-        $this->checkProcessors('Gotenberg', []);
+        $this->checkProcessors('Gotenberg', ['landscape' => false]);
         $this->checkProcessors('Gotenberg', ['landscape' => true]);
     }
     public function testChromium()
     {
-        $this->checkProcessors('Chromium', []);
+        $this->checkProcessors('Chromium', ['landscape' => false]);
         $this->checkProcessors('Chromium', ['landscape' => true]);
     }
 
@@ -86,7 +84,8 @@ class ProcessorTest extends ModelTestCase
         $pdfInfo = $this->getPDFInfo($tempPath);
         $orientation = $this->getOrientationFromPDFInfo($pdfInfo);
 
-        if (isset($config['landscape']) && $config['landscape'] == 'true') {
+        // for pdfReactor, there's no landscape config option
+        if (isset($config['landscape']) && $config['landscape'] == true) {
             $this->assertEquals('landscape', $orientation, 'Check if pdf is in landscape orientation');
         } else {
             $this->assertEquals('portrait', $orientation, 'Check if pdf is in portrait orientation');
