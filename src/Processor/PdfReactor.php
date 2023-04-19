@@ -100,7 +100,7 @@ class PdfReactor extends Processor
 
         $reactorConfig = array_merge($reactorConfig, $customConfig); //add additional configs
 
-        $reactorConfig['document'] = $this->processHtml($html, $params); //temporary disabled for tests
+        $reactorConfig['document'] = $this->processHtml($html, $params);
         $pdf = $pdfreactor->convert($reactorConfig);
         $pdf = base64_decode($pdf->document);
         if (!$returnFilePath) {
