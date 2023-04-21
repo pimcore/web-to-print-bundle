@@ -53,7 +53,7 @@ class SettingsController extends UserAwareController
             'values' => $valueArray,
         ];
 
-        return $this->adminJson($response);
+        return $this->jsonResponse($response);
     }
 
     /**
@@ -75,7 +75,7 @@ class SettingsController extends UserAwareController
 
         Config::save($values);
 
-        return $this->adminJson(['success' => true]);
+        return $this->jsonResponse(['success' => true]);
     }
 
     /**

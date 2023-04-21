@@ -13,7 +13,8 @@
     "prefer-stable": true,
     "minimum-stability": "dev",
     "require": {
-        "pimcore/pimcore": "dev-decouple_admin_bundle_11 as 11.0.0"
+        "pimcore/pimcore": "dev-decouple_admin_bundle_11 as 11.0.0",
+        "pimcore/admin-ui-classic": "dev-decouple_from_core as 1.0.0"
     },
     "require-dev": {
       "phpstan/phpstan": "^1.10.5",
