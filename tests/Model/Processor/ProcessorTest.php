@@ -18,9 +18,6 @@ namespace Pimcore\Bundle\WebToPrintBundle\Tests\Model\Processor;
 
 use Pimcore\Bundle\WebToPrintBundle\Config;
 use Pimcore\Bundle\WebToPrintBundle\Processor;
-use Pimcore\Bundle\WebToPrintBundle\Processor\Chromium;
-use Pimcore\Bundle\WebToPrintBundle\Processor\Gotenberg;
-use Pimcore\Bundle\WebToPrintBundle\Processor\PdfReactor;
 use Pimcore\Document\Adapter\Ghostscript;
 use Pimcore\Logger;
 use Pimcore\Tests\Support\Test\ModelTestCase;
