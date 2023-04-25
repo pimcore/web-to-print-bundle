@@ -36,6 +36,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class SettingsController extends UserAwareController
 {
     use JsonHelperTrait;
+
     /**
      * @Route("/get-web2print", name="pimcore_bundle_web2print_settings_getweb2print", methods={"GET"})
      *
