@@ -1,0 +1,122 @@
+pimcore:
+    general:
+        timezone: Europe/Berlin
+        path_variable: ''
+        domain: pimcore-test.dev
+        redirect_to_maindomain: false
+        language: en
+        valid_languages: 'en,de'
+        fallback_languages:
+            en: ''
+            de: ''
+        default_language: ''
+        disable_usage_statistics: false
+    documents:
+        versions:
+            days: null
+            steps: 10
+        error_pages:
+            default: /error
+        allow_trailing_slash: 'no'
+        generate_preview: true
+        type_definitions:
+            map:
+                printpage:
+                    class: Pimcore\Bundle\WebToPrintBundle\Model\Document\Printpage
+                    children_supported: false
+                    direct_route: true
+                    predefined_document_types: true
+                printcontainer:
+                    class: Pimcore\Bundle\WebToPrintBundle\Model\Document\Printcontainer
+                    only_printable_childrens: true
+                    direct_route: true
+                    predefined_document_types: true
+    objects:
+        versions:
+            days: null
+            steps: 10
+    assets:
+        versions:
+            days: null
+            steps: 10
+        icc_rgb_profile: ''
+        icc_cmyk_profile: ''
+    full_page_cache:
+        enabled: false
+        lifetime: null
+        exclude_patterns: ''
+        exclude_cookie: ''
+    httpclient:
+        adapter: Socket
+        proxy_host: ''
+        proxy_port: ''
+        proxy_user: ''
+        proxy_pass: ''
+    email:
+        sender:
+            name: pimcore
+            email: pimcore@example.com
+        return:
+            name: pimcore
+            email: pimcore@example.com
+        debug:
+            email_addresses: ''
+    applicationlog:
+        mail_notification:
+            send_log_summary: false
+            filter_priority: null
+            mail_receiver: ''
+        archive_treshold: '30'
+        archive_alternative_database: ''
+    chromium:
+        uri: '%env(PIMCORE_TEST_CHROMIUM_DNS)%'
+    gotenberg:
+        base_url: '%env(PIMCORE_TEST_GOTENBERG_DNS)%'
+    config_location:
+        image_thumbnails:
+            write_target:
+                type: 'settings-store'
+        video_thumbnails:
+            write_target:
+                type: 'settings-store'
+        document_types:
+            write_target:
+                type: 'settings-store'
+        predefined_properties:
+            write_target:
+                type: 'settings-store'
+        predefined_asset_metadata:
+            write_target:
+                type: 'settings-store'
+        perspectives:
+            write_target:
+                type: 'settings-store'
+        custom_views:
+            write_target:
+                type: 'settings-store'
+        object_custom_layouts:
+            write_target:
+                type: 'settings-store'
+        system_settings:
+            write_target:
+                type: 'symfony-config'
+            read_target:
+                type: 'symfony-config'
+
+pimcore_admin:
+    branding:
+        color_login_screen: ''
+        color_admin_interface: ''
+        login_screen_custom_image: ''
+    config_location:
+        admin_system_settings:
+            write_target:
+                type: 'settings-store'
+            read_target:
+                type: 'settings-store'
+
+pimcore_web_to_print:
+    config_location:
+        web_to_print:
+            write_target:
+                type: 'settings-store'
