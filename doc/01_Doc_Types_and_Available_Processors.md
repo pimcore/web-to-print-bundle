@@ -4,8 +4,8 @@ This bundle introduces 2 new document types:
 
 | Type           | Description                                                                                                                                                 | 
 |----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [PrintPage](./doc/02_Print_Documents.md#printpage)      | Like pages, but specialized for print (PDF preview, rendering options, ...)                                                                                 | 
-| [PrintContainer](./doc/02_Print_Documents.md#printcontainer) | Organizing print pages in chapters and render them all together.                                                                                            | 
+| [PrintPage](./02_Print_Documents.md#printpage)      | Like pages, but specialized for print (PDF preview, rendering options, ...)                                                                                 | 
+| [PrintContainer](./02_Print_Documents.md#printcontainer) | Organizing print pages in chapters and render them all together.                                                                                            | 
 
 ## Available PDF Processors
 
@@ -15,4 +15,4 @@ This bundle introduces 2 new document types:
 | [Gotenberg](https://gotenberg.dev/) | A Docker service with Chromium and LibreOffice support   | 
 | [PDF Reactor](https://www.pdfreactor.com/) | A REST/SOAP solution, please visit the official website for further information                                                                                          | 
 
- > For details on how to install and configure these processors, please see [Additional Tools Installation](https://github.com/pimcore/pimcore/blob/11.x/doc/23_Installation_and_Upgrade/03_System_Setup_and_Hosting/06_Additional_Tools_Installation.md) page in the Core.
+ > For details on how to install and configure these processors, please see [Additional Tools Installation](https://pimcore.com/docs/platform/Pimcore/Installation_and_Upgrade/System_Setup_and_Hosting/Additional_Tools_Installation) page in the Core.
