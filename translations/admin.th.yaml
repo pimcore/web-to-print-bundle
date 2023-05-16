@@ -1,0 +1,85 @@
+---
+add_printpage: "\u0E40\u0E1E\u0E34\u0E48\u0E21 PrintPage"
+add_printcontainer: "\u0E40\u0E1E\u0E34\u0E48\u0E21 PrintContainer"
+web2print_settings: Web-to-Print Settings
+web2print_preview_pdf: "\u0E2A\u0E23\u0E49\u0E32\u0E07 & \u0E14\u0E39\u0E15\u0E31\u0E27\u0E2D\u0E22\u0E48\u0E32\u0E07
+  PDF"
+web2print_cancel_pdf_creation: "\u0E22\u0E01\u0E40\u0E25\u0E34\u0E01\u0E01\u0E32\u0E23\u0E2A\u0E23\u0E49\u0E32\u0E07
+  PDF"
+web2print_generate_pdf: "\u0E2A\u0E23\u0E49\u0E32\u0E07 PDF"
+web2print_download_pdf: "\u0E14\u0E32\u0E27\u0E19\u0E4C\u0E42\u0E2B\u0E25\u0E14 PDF"
+web2print_last-generated: "\u0E2A\u0E23\u0E49\u0E32\u0E07\u0E25\u0E48\u0E32\u0E2A\u0E38\u0E14"
+web2print_last-generate-message: "\u0E2A\u0E23\u0E49\u0E32\u0E07\u0E02\u0E49\u0E2D\u0E04\u0E27\u0E32\u0E21\u0E25\u0E48\u0E32\u0E2A\u0E38\u0E14"
+web2print: "\u0E40\u0E27\u0E47\u0E1A\u0E17\u0E35\u0E48\u0E08\u0E30\u0E1E\u0E34\u0E21\u0E1E\u0E4C"
+web2print_prepare_pdf_generation: "\u0E40\u0E15\u0E23\u0E35\u0E22\u0E21\u0E01\u0E32\u0E23\u0E2A\u0E23\u0E49\u0E32\u0E07
+  PDF"
+web2print_start_html_rendering: "\u0E40\u0E23\u0E34\u0E48\u0E21\u0E01\u0E32\u0E23\u0E41\u0E2A\u0E14\u0E07\u0E1C\u0E25
+  HTML"
+web2print_finished_html_rendering: "\u0E01\u0E32\u0E23\u0E41\u0E2A\u0E14\u0E07\u0E1C\u0E25
+  HTML \u0E40\u0E2A\u0E23\u0E47\u0E08\u0E2A\u0E34\u0E49\u0E19"
+web2print_saved_html_file: "\u0E44\u0E1F\u0E25\u0E4C HTML \u0E17\u0E35\u0E48\u0E1A\u0E31\u0E19\u0E17\u0E36\u0E01\u0E44\u0E27\u0E49"
+web2print_pdf_conversion: "\u0E01\u0E32\u0E23\u0E41\u0E1B\u0E25\u0E07 PDF"
+web2print_saving_pdf_document: "\u0E1A\u0E31\u0E19\u0E17\u0E36\u0E01\u0E40\u0E2D\u0E01\u0E2A\u0E32\u0E23
+  PDF"
+web2print_author: "\u0E1C\u0E39\u0E49\u0E40\u0E02\u0E35\u0E22\u0E19"
+web2print_printermarks: Printermarks
+web2print_bookmarks: "\u0E17\u0E35\u0E48\u0E04\u0E31\u0E48\u0E19"
+web2print_only_published: "\u0E40\u0E1B\u0E47\u0E19\u0E44\u0E1B\u0E44\u0E14\u0E49\u0E40\u0E09\u0E1E\u0E32\u0E30\u0E01\u0E31\u0E1A\u0E40\u0E2D\u0E01\u0E2A\u0E32\u0E23\u0E17\u0E35\u0E48\u0E40\u0E1C\u0E22\u0E41\u0E1E\u0E23\u0E48"
+web2print_documents_changed: "\u0E40\u0E2D\u0E01\u0E2A\u0E32\u0E23\u0E21\u0E35\u0E01\u0E32\u0E23\u0E40\u0E1B\u0E25\u0E35\u0E48\u0E22\u0E19\u0E41\u0E1B\u0E25\u0E07\u0E15\u0E31\u0E49\u0E07\u0E41\u0E15\u0E48\u0E01\u0E32\u0E23\u0E2A\u0E23\u0E49\u0E32\u0E07
+  pdf \u0E04\u0E23\u0E31\u0E49\u0E07\u0E25\u0E48\u0E32\u0E2A\u0E38\u0E14"
+web2print_addOverprint: "\u0E40\u0E1E\u0E34\u0E48\u0E21\u0E01\u0E32\u0E23\u0E1E\u0E34\u0E21\u0E1E\u0E4C
+  \u0E2A\u0E35\u0E2D\u0E48\u0E2D\u0E19\u0E17\u0E31\u0E1A\u0E1A\u0E19\u0E1E\u0E37\u0E49\u0E19\u0E2B\u0E25\u0E31\u0E07\u0E17\u0E35\u0E48\u0E21\u0E35\u0E2A\u0E35\u0E40\u0E02\u0E49\u0E21\u0E01\u0E27\u0E48\u0E32. "
+web2print_enableDebugMode: "\u0E40\u0E1B\u0E34\u0E14\u0E43\u0E0A\u0E49\u0E07\u0E32\u0E19\u0E42\u0E2B\u0E21\u0E14\u0E41\u0E01\u0E49\u0E44\u0E02\u0E02\u0E49\u0E2D\u0E1A\u0E01\u0E1E\u0E23\u0E48\u0E2D\u0E07"
+web2print_enableLenientHttpsMode: "\u0E40\u0E1B\u0E34\u0E14\u0E43\u0E0A\u0E49\u0E07\u0E32\u0E19\u0E42\u0E2B\u0E21\u0E14\u0E1C\u0E48\u0E2D\u0E19\u0E1B\u0E23\u0E19
+  HTTPS"
+web2print_enableLenientHttpsMode_txt: "\u0E40\u0E1B\u0E34\u0E14\u0E43\u0E0A\u0E49\u0E07\u0E32\u0E19\u0E15\u0E31\u0E27\u0E40\u0E25\u0E37\u0E2D\u0E01\u0E19\u0E35\u0E49\u0E2B\u0E32\u0E01
+  PDFreactor \u0E44\u0E21\u0E48\u0E2A\u0E32\u0E21\u0E32\u0E23\u0E16\u0E40\u0E0A\u0E37\u0E48\u0E2D\u0E21\u0E15\u0E48\u0E2D\u0E44\u0E14\u0E49\u0E2A\u0E33\u0E40\u0E23\u0E47\u0E08\u0E1C\u0E48\u0E32\u0E19
+  HTTPS"
+web2print_tags: tags
+web2print_links: links
+web2print_tool: Tool
+web2print_save_mode: Document Save Mode
+web2print_save_mode_txt: Document Save Mode = cleanup deletes all not used document
+  elements for current document. This might be necessary for useage reports in print
+  documents.
+web2print_pdfreactor_settings: PDFreactor Settings
+web2print_server: Server
+web2print_baseURL: BaseURL
+web2print_baseURL_txt: BaseURL for PDFreactor. This is prefixed to each relative url
+  in print templates when creating PDFs.
+web2print_docker_baseURL_txt: This is prefixed to each relative url in print templates
+  when creating PDFs.
+web2print_apiKey_txt: If the PDFreactor instance is set up to require API keys, you
+  can enter it here.
+web2print_json_converter: Open JSON converter/validator
+web2print_licence: Licence
+web2print_gotenberg_settings: Gotenberg Settings
+web2print_gotenberg_documentation: Option Documentation
+web2print_gotenberg_documentation_additions: Warning
+web2print_gotenberg_documentation_additions_text: Since Gotenberg is Docker-powered
+  service, it requires absolute urls to work. By default, it works within the same
+  container by using `http://nginx:80` as host url. Please override this configuration
+  accordingly into the settings below.
+web2print_headlesschrome_json_converter: ""
+web2print_hostname: Hostname
+web2print_protocol: Protocol
+web2print_port: Port
+web2print_apiKey: API Key
+web2print_chromium_requirements: Requirements
+web2print_chromium_requirements_documentation: Please make sure to install chrome-php/chrome
+  via composer
+web2print_chromium_settings: Chromium settings
+web2print_chromium_documentation: Option Documentation
+web2print_chromium_options_documentation: Please make sure following configuration
+  matches the option available on Chrome DevTools Documentation, any other values
+  may break the pdf generation
+web2print_chromium_documentation_additions: Additional Options
+web2print_chromium_documentation_additions_text: 'There are two additional options:
+  "header" and "footer". This options need a URL, which returns the header or footer
+  template.'
+web2print_chromium_documentation_docker: Notes for Dockerized Chromium
+web2print_chromium_documentation_docker_text: When using a Dockerized Chromium through
+  WebSocket, the following field must be set to the web server service accordingly.
+  eg. `http://nginx:80`
+web2print_hostURL: Host Url
+...
