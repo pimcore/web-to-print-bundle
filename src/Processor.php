@@ -291,4 +291,3 @@ abstract class Processor
      */
     abstract public function getPdfFromString(string $html, array $params = [], bool $returnFilePath = false): string;
 }
-

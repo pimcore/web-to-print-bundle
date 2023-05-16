@@ -16,12 +16,13 @@ declare(strict_types=1);
 
 namespace Pimcore\Bundle\WebToPrintBundle\Controller;
 
-use Pimcore\Bundle\AdminBundle\Controller\AdminController;
 use Pimcore\Bundle\WebToPrintBundle\Config;
 use Pimcore\Bundle\WebToPrintBundle\Processor;
 use Pimcore\Bundle\WebToPrintBundle\Processor\Chromium;
 use Pimcore\Bundle\WebToPrintBundle\Processor\Gotenberg;
 use Pimcore\Bundle\WebToPrintBundle\Processor\PdfReactor;
+use Pimcore\Controller\Traits\JsonHelperTrait;
+use Pimcore\Controller\UserAwareController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,8 +33,10 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @internal
  */
-class SettingsController extends AdminController
+class SettingsController extends UserAwareController
 {
+    use JsonHelperTrait;
+
     /**
      * @Route("/get-web2print", name="pimcore_bundle_web2print_settings_getweb2print", methods={"GET"})
      *
@@ -51,7 +54,7 @@ class SettingsController extends AdminController
             'values' => $valueArray,
         ];
 
-        return $this->adminJson($response);
+        return $this->jsonResponse($response);
     }
 
     /**
@@ -73,7 +76,7 @@ class SettingsController extends AdminController
 
         Config::save($values);
 
-        return $this->adminJson(['success' => true]);
+        return $this->jsonResponse(['success' => true]);
     }
 
     /**

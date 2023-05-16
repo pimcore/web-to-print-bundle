@@ -1,0 +1,15 @@
+parameters:
+    level: 6
+    paths:
+        - src
+    bootstrapFiles:
+        - phpstan-bootstrap.php
+    excludePaths:
+        - '**/Processor/PdfReactor.php'
+        - '**/PDFreactor.class.php'
+    checkGenericClassInNonGenericObjectType: false
+    checkMissingIterableValueType: false
+
+includes:
+    - vendor/phpstan/phpstan-symfony/extension.neon
+    - phpstan-baseline.neon

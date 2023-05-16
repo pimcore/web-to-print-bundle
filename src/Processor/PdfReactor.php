@@ -229,4 +229,3 @@ class PdfReactor extends Processor
         include_once(__DIR__ . '/Api/PDFreactor.class.php');
     }
 }
-
