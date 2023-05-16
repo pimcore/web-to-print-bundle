@@ -1,0 +1,76 @@
+---
+add_printpage: "Nyomtat\xE1si Oldal hozz\xE1ad\xE1sa"
+add_printcontainer: "Nyomtat\xE1si Kont\xE9ner hozz\xE1ad\xE1sa"
+web2print_settings: Web-to-Print Settings
+web2print_preview_pdf: "PDF gener\xE1l\xE1sa & el\u0151n\xE9zet"
+web2print_cancel_pdf_creation: "PDF L\xE9trehoz\xE1s le\xE1ll\xEDt\xE1sa"
+web2print_generate_pdf: "PDF gener\xE1l\xE1sa"
+web2print_download_pdf: "PDF let\xF6lt\xE9se"
+web2print_last-generated: "Utols\xF3 gener\xE1l\xE1s"
+web2print_last-generate-message: "Utols\xF3 gener\xE1l\xE1s \xFCzenete"
+web2print: Web-to-Print
+web2print_prepare_pdf_generation: "PDF gener\xE1l\xE1s el\u0151k\xE9sz\xEDt\xE9se"
+web2print_start_html_rendering: "HTML gener\xE1l\xE1s elkezd\xE9se"
+web2print_finished_html_rendering: "HTML gener\xE1l\xE1s v\xE9ge"
+web2print_saved_html_file: Mentett HTML file
+web2print_pdf_conversion: "PDF konverzi\xF3"
+web2print_saving_pdf_document: "PDF ment\xE9se"
+web2print_author: "Szerz\u0151"
+web2print_printermarks: "V\xEDzjelek"
+web2print_bookmarks: "K\xF6nyvjelz\u0151k"
+web2print_only_published: "Csak publik\xE1lt Dokumentumokn\xE1l lehets\xE9ges"
+web2print_documents_changed: "Megv\xE1ltozott a Dokumentum az utols\xF3 PDF gener\xE1l\xE1s
+  \xF3ta"
+web2print_addOverprint: Overprinting
+web2print_enableDebugMode: "Debug m\xF3d enged\xE9lyez\xE9se"
+web2print_enableLenientHttpsMode: "Enged\xE9lyezd az enged\xE9keny HTTPS m\xF3dot"
+web2print_enableLenientHttpsMode_txt: "Enged\xE9lyezd ezt a be\xE1ll\xEDt\xE1st, ha
+  a PDFreactor nem tud kapcsol\xF3dni HTTPS-en kereszt\xFCl"
+web2print_tags: tags
+web2print_links: links
+web2print_tool: Tool
+web2print_save_mode: Document Save Mode
+web2print_save_mode_txt: Document Save Mode = cleanup deletes all not used document
+  elements for current document. This might be necessary for useage reports in print
+  documents.
+web2print_pdfreactor_settings: PDFreactor Settings
+web2print_server: Server
+web2print_baseURL: BaseURL
+web2print_baseURL_txt: BaseURL for PDFreactor. This is prefixed to each relative url
+  in print templates when creating PDFs.
+web2print_docker_baseURL_txt: This is prefixed to each relative url in print templates
+  when creating PDFs.
+web2print_apiKey_txt: If the PDFreactor instance is set up to require API keys, you
+  can enter it here.
+web2print_json_converter: Open JSON converter/validator
+web2print_licence: Licence
+web2print_gotenberg_settings: Gotenberg Settings
+web2print_gotenberg_documentation: Option Documentation
+web2print_gotenberg_documentation_additions: Warning
+web2print_gotenberg_documentation_additions_text: Since Gotenberg is Docker-powered
+  service, it requires absolute urls to work. By default, it works within the same
+  container by using `http://nginx:80` as host url. Please override this configuration
+  accordingly into the settings below.
+web2print_headlesschrome_json_converter: ""
+web2print_hostname: Hostname
+web2print_protocol: Protocol
+web2print_port: Port
+web2print_apiKey: API Key
+web2print_chromium_requirements: Requirements
+web2print_chromium_requirements_documentation: Please make sure to install chrome-php/chrome
+  via composer
+web2print_chromium_settings: Chromium settings
+web2print_chromium_documentation: Option Documentation
+web2print_chromium_options_documentation: Please make sure following configuration
+  matches the option available on Chrome DevTools Documentation, any other values
+  may break the pdf generation
+web2print_chromium_documentation_additions: Additional Options
+web2print_chromium_documentation_additions_text: 'There are two additional options:
+  "header" and "footer". This options need a URL, which returns the header or footer
+  template.'
+web2print_chromium_documentation_docker: Notes for Dockerized Chromium
+web2print_chromium_documentation_docker_text: When using a Dockerized Chromium through
+  WebSocket, the following field must be set to the web server service accordingly.
+  eg. `http://nginx:80`
+web2print_hostURL: Host Url
+...
