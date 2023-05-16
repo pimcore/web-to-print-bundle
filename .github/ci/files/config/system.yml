@@ -56,6 +56,10 @@ pimcore:
             mail_receiver: ''
         archive_treshold: '30'
         archive_alternative_database: ''
+    chromium:
+        uri: '%env(PIMCORE_TEST_CHROMIUM_DNS)%'
+    gotenberg:
+        base_url: '%env(PIMCORE_TEST_GOTENBERG_DNS)%'
 pimcore_admin:
     branding:
         color_login_screen: ''
