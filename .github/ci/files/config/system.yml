@@ -19,18 +19,6 @@ pimcore:
             default: /error
         allow_trailing_slash: 'no'
         generate_preview: true
-        type_definitions:
-            map:
-                printpage:
-                    class: Pimcore\Bundle\WebToPrintBundle\Model\Document\Printpage
-                    children_supported: false
-                    direct_route: true
-                    predefined_document_types: true
-                printcontainer:
-                    class: Pimcore\Bundle\WebToPrintBundle\Model\Document\Printcontainer
-                    only_printable_childrens: true
-                    direct_route: true
-                    predefined_document_types: true
     objects:
         versions:
             days: null
@@ -72,51 +60,8 @@ pimcore:
         uri: '%env(PIMCORE_TEST_CHROMIUM_DNS)%'
     gotenberg:
         base_url: '%env(PIMCORE_TEST_GOTENBERG_DNS)%'
-    config_location:
-        image_thumbnails:
-            write_target:
-                type: 'settings-store'
-        video_thumbnails:
-            write_target:
-                type: 'settings-store'
-        document_types:
-            write_target:
-                type: 'settings-store'
-        predefined_properties:
-            write_target:
-                type: 'settings-store'
-        predefined_asset_metadata:
-            write_target:
-                type: 'settings-store'
-        perspectives:
-            write_target:
-                type: 'settings-store'
-        custom_views:
-            write_target:
-                type: 'settings-store'
-        object_custom_layouts:
-            write_target:
-                type: 'settings-store'
-        system_settings:
-            write_target:
-                type: 'symfony-config'
-            read_target:
-                type: 'symfony-config'
-
 pimcore_admin:
     branding:
         color_login_screen: ''
         color_admin_interface: ''
         login_screen_custom_image: ''
-    config_location:
-        admin_system_settings:
-            write_target:
-                type: 'settings-store'
-            read_target:
-                type: 'settings-store'
-
-pimcore_web_to_print:
-    config_location:
-        web_to_print:
-            write_target:
-                type: 'settings-store'
