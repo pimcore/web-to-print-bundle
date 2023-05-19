@@ -70,9 +70,12 @@ class SettingsController extends UserAwareController
 
         $values = $this->decodeJson($request->get('data'));
 
-        unset($values['documentation']);
-        unset($values['additions']);
-        unset($values['json_converter']);
+        unset(
+            $values['documentation'],
+            $values['requirements'],
+            $values['additions'],
+            $values['json_converter'],
+        );
 
         Config::save($values);
 
