@@ -25,6 +25,10 @@
       "codeception/module-symfony": "^3.1.0",
       "codeception/phpunit-wrapper": "^9"
     },
+    "suggest": {
+      "gotenberg/gotenberg-php": "Required for generating pdf via Gotenberg in assets preview (LibreOffice), page preview, version diff and web2print",
+      "chrome-php/chrome": "Required for Documents Page Previews"
+    },
     "autoload": {
         "psr-4": {
             "Pimcore\\Bundle\\WebToPrintBundle\\": "src/"
@@ -45,4 +49,4 @@
             ]
         }
     }
-}
+},
