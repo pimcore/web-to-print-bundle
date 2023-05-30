@@ -1,6 +1,6 @@
 {
     "name": "pimcore/web-to-print-bundle",
-    "license": "GPL-3.0+",
+    "license": "GPL-3.0-or-later",
     "type": "pimcore-bundle",
     "description": "Pimcore WebToPrint Bundle",
     "config": {
