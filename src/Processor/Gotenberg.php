@@ -247,7 +247,7 @@ class Gotenberg extends Processor
 
                 $assets[] = [
                     'path' => urldecode($localFilePath),
-                    'name' => urldecode($fileName),
+                    'filename' => urldecode($fileName),
                 ];
 
                 $path = preg_quote($path, '!');
@@ -290,7 +290,7 @@ class Gotenberg extends Processor
 
                 $assets[] = [
                     'path' => str_replace([' 1x', ' 2x', '@2x'], '', urldecode($localFilePath)),
-                    'name' => urldecode($fileName),
+                    'filename' => urldecode($fileName),
                 ];
 
                 $parts[$key] = $fileName;
