@@ -62,7 +62,7 @@ class Gotenberg extends Processor
             }
         }
 
-        if (emtpy($assets) === false) {
+        if (empty($assets) === false) {
             $gotenbergSettings['assets'] = $assets;
         }
 
