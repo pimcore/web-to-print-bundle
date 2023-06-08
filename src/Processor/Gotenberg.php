@@ -24,6 +24,7 @@ use Pimcore\Bundle\WebToPrintBundle\Event\Model\PrintConfigEvent;
 use Pimcore\Bundle\WebToPrintBundle\Model\Document\PrintAbstract;
 use Pimcore\Bundle\WebToPrintBundle\Processor;
 use Pimcore\Logger;
+use function Symfony\Component\String\s;
 
 class Gotenberg extends Processor
 {
@@ -45,7 +46,10 @@ class Gotenberg extends Processor
             $params['hostUrl'] = $web2printConfig['gotenbergHostUrl'];
         }
 
+        $params['processor'] = $this;
+
         $html = $this->processHtml($html, $params);
+        [$assets, $html] = $this->handleAssets($html);
         $this->updateStatus($document->getId(), 40, 'finished_html_rendering');
 
         if ($gotenbergSettings) {
@@ -56,6 +60,10 @@ class Gotenberg extends Processor
                 }
                 unset($gotenbergSettings[$item]);
             }
+        }
+
+        if (emtpy($assets) === false) {
+            $gotenbergSettings['assets'] = $assets;
         }
 
         try {
@@ -93,6 +101,10 @@ class Gotenberg extends Processor
     public function getPdfFromString(string $html, array $params = [], bool $returnFilePath = false): string
     {
         $params = $params ?: $this->getDefaultOptions();
+
+        $assets = $params['assets'] ?? [];
+
+        unset($params['assets']);
 
         $event = new PrintConfigEvent($this, [
             'params' => $params,
@@ -157,6 +169,16 @@ class Gotenberg extends Processor
             $chromium->pdfFormat($params['pdfFormat']);
         }
 
+        if (empty($assets) === false) {
+            $assetStreams = [];
+
+            foreach ($assets as $asset) {
+                $assetStreams[] = Stream::path($asset['path'], $asset['filename']);
+            }
+
+            $chromium->assets(...$assetStreams);
+        }
+
         $request = $chromium->outputFilename($tempFileName)->html(Stream::string('processor.html', $html));
 
         if ($returnFilePath) {
@@ -189,6 +211,104 @@ class Gotenberg extends Processor
             //'userAgent',
             //'extraHttpHeaders' => [],
             //'pdfFormat',
+        ];
+    }
+
+    private function handleAssets(string $html): array
+    {
+        $assets = [];
+
+        preg_match_all("@(href|src)\s*=[\"']([^(http|mailto|javascript|data:|#)].*?(css|jpe?g|gif|png)?)[\"']@is", $html, $matches);
+        if (empty($matches[0]) === false) {
+            foreach ($matches[0] as $key => $value) {
+                $path = $matches[2][$key];
+
+                if (s($path)->containsAny(['http://', 'https://', '//', 'file://'])) {
+                    continue;
+                }
+
+                $subPath = '/var/assets';
+
+                if (s($path)->containsAny(['css', 'js']) === true) {
+                    $subPath = '';
+                }
+
+                if (s($path)->containsAny('image-thumb') === true) {
+                    $subPath = '/var/tmp/thumbnails';
+                }
+
+                $localFilePath = sprintf(
+                    '%s%s%s',
+                    PIMCORE_WEB_ROOT,
+                    $subPath,
+                    $path
+                );
+                $fileName = basename($localFilePath);
+
+                $assets[] = [
+                    'path' => urldecode($localFilePath),
+                    'name' => urldecode($fileName),
+                ];
+
+                $path = preg_quote($path, '!');
+                $html = preg_replace(
+                    "!([\"'])$path([\"'])!is",
+                    '\\1' . $fileName . '\\2',
+                    $html
+                );
+            }
+        }
+
+        preg_match_all("@srcset\s*=[\"'](.*?)[\"']@is", $html, $matches);
+        foreach ($matches[1] as $i => $value) {
+            $parts = explode(',', $value);
+
+            foreach ($parts as $key => $v) {
+                $v = trim($v);
+
+                if (s($v)->containsAny(['http://', 'https://', '//', 'file://'])) {
+                    continue;
+                }
+
+                $subPath = '/var/assets';
+
+                if (s($v)->containsAny(['css', 'js']) === true) {
+                    $subPath = '';
+                }
+
+                if (s($v)->containsAny('image-thumb') === true) {
+                    $subPath = '/var/tmp/thumbnails';
+                }
+
+                $localFilePath = sprintf(
+                    '%s%s%s',
+                    PIMCORE_WEB_ROOT,
+                    $subPath,
+                    $v
+                );
+                $fileName = basename($localFilePath);
+
+                $assets[] = [
+                    'path' => str_replace([' 1x', ' 2x', '@2x'], '', urldecode($localFilePath)),
+                    'name' => urldecode($fileName),
+                ];
+
+                $parts[$key] = $fileName;
+            }
+
+            $srcSet = sprintf(
+                ' srcset="%s" ',
+                implode(', ', $parts)
+            );
+
+            if ($matches[0][$i]) {
+                $html = str_replace($matches[0][$i], $srcSet, $html);
+            }
+        }
+
+        return [
+            $assets,
+            $html,
         ];
     }
 }
