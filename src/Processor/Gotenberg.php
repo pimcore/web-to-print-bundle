@@ -229,7 +229,7 @@ class Gotenberg extends Processor
 
                 $subPath = '/var/assets';
 
-                if (s($path)->containsAny(['css', 'js']) === true) {
+                if (s($path)->containsAny(['css', 'js', 'ttf']) === true) {
                     $subPath = '';
                 }
 
