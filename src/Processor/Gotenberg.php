@@ -118,7 +118,11 @@ class Gotenberg extends Processor
             }
         }
 
-        if ($params['marginTop'] ?? $params['marginBottom'] ?? $params['marginLeft'] ?? isset($params['marginRight'])) {
+        if (isset($params['marginTop'])
+            || isset($params['marginBottom'])
+            || isset($params['marginLeft'])
+            || isset($params['marginRight'])
+        ) {
             $chromium->margins(
                 $params['marginTop'] ?? 0.39,
                 $params['marginBottom'] ?? 0.39,
