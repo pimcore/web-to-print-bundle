@@ -118,18 +118,12 @@ class Gotenberg extends Processor
             }
         }
 
-        if (isset($params['marginTop'])
-            || isset($params['marginBottom'])
-            || isset($params['marginLeft'])
-            || isset($params['marginRight'])
-        ) {
-            $chromium->margins(
-                $params['marginTop'] ?? 0.39,
-                $params['marginBottom'] ?? 0.39,
-                $params['marginLeft'] ?? 0.39,
-                $params['marginRight'] ?? 0.39
-            );
-        }
+        $chromium->margins(
+            $params['marginTop'] ?? 0.39,
+            $params['marginBottom'] ?? 0.39,
+            $params['marginLeft'] ?? 0.39,
+            $params['marginRight'] ?? 0.39
+        );
 
         if (isset($params['scale'])) {
             $chromium->scale($params['scale']);
