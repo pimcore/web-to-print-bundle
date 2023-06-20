@@ -1,7 +1,7 @@
 ---
 add_printpage: "Druckseite hinzuf\xFCgen"
 add_printcontainer: "Druckcontainer hinzuf\xFCgen"
-web2print_settings: Web-to-Print Settings
+web2print_settings: Web-to-Print-Einstellungen
 web2print_preview_pdf: PDF Erstellung & Vorschau
 web2print_cancel_pdf_creation: PDF-Erstellung abbrechen
 web2print_generate_pdf: PDF generieren
@@ -27,49 +27,50 @@ web2print_enableLenientHttpsMode_txt: "Aktivieren Sie diese Option, wenn PDFreac
   \xFCber HTTPS keine Verbindung herstellen kann"
 web2print_tags: tags
 web2print_links: links
-web2print_tool: Tool
-web2print_save_mode: Document Save Mode
-web2print_save_mode_txt: Document Save Mode = cleanup deletes all not used document
-  elements for current document. This might be necessary for useage reports in print
-  documents.
-web2print_pdfreactor_settings: PDFreactor Settings
+web2print_tool: Werkzeug
+web2print_save_mode: Dokument-Sicherungsmodus
+web2print_save_mode_txt: "Document Save Mode = cleanup l\xF6scht alle nicht verwendeten
+  Dokumentelemente f\xFCr das aktuelle Dokument. Dies kann f\xFCr Verwendungsnachweise
+  in Druckdokumenten notwendig sein."
+web2print_pdfreactor_settings: PDFreactor Einstellungen
 web2print_server: Server
 web2print_baseURL: BaseURL
-web2print_baseURL_txt: BaseURL for PDFreactor. This is prefixed to each relative url
-  in print templates when creating PDFs.
-web2print_docker_baseURL_txt: This is prefixed to each relative url in print templates
-  when creating PDFs.
-web2print_apiKey_txt: If the PDFreactor instance is set up to require API keys, you
-  can enter it here.
+web2print_baseURL_txt: "BaseURL f\xFCr PDFreactor. Diese wird jeder relativen URL
+  in Druckvorlagen bei der Erstellung von PDFs vorangestellt."
+web2print_docker_baseURL_txt: Diese wird jeder relativen URL in Druckvorlagen bei
+  der Erstellung von PDFs vorangestellt.
+web2print_apiKey_txt: "Wenn die PDFreactor-Instanz so eingerichtet ist, dass sie API-Schl\xFCssel
+  ben\xF6tigt, k\xF6nnen Sie diese hier eingeben."
 web2print_json_converter: Open JSON converter/validator
-web2print_licence: Licence
-web2print_gotenberg_settings: Gotenberg Settings
-web2print_gotenberg_documentation: Option Documentation
-web2print_gotenberg_documentation_additions: Warning
-web2print_gotenberg_documentation_additions_text: Since Gotenberg is Docker-powered
-  service, it requires absolute urls to work. By default, it works within the same
-  container by using `http://nginx:80` as host url. Please override this configuration
-  accordingly into the settings below.
+web2print_licence: Lizenz
+web2print_gotenberg_settings: Gotenberg Einstellungen
+web2print_gotenberg_documentation: Option Dokumentation
+web2print_gotenberg_documentation_additions: Warnung
+web2print_gotenberg_documentation_additions_text: "Da Gotenberg ein Docker-gest\xFCtzter
+  Dienst ist, ben\xF6tigt er absolute URLs, um zu funktionieren. Standardm\xE4\xDFig
+  funktioniert er innerhalb desselben Containers, indem er `http://nginx:80` als Host-URL
+  verwendet. Bitte \xFCberschreiben Sie diese Konfiguration entsprechend in den Einstellungen
+  unten."
 web2print_headlesschrome_json_converter: ""
 web2print_hostname: Hostname
 web2print_protocol: Protocol
 web2print_port: Port
 web2print_apiKey: API Key
-web2print_chromium_requirements: Requirements
-web2print_chromium_requirements_documentation: Please make sure to install chrome-php/chrome
-  via composer
-web2print_chromium_settings: Chromium settings
-web2print_chromium_documentation: Option Documentation
-web2print_chromium_options_documentation: Please make sure following configuration
-  matches the option available on Chrome DevTools Documentation, any other values
-  may break the pdf generation
+web2print_chromium_requirements: Anforderungen
+web2print_chromium_requirements_documentation: "Bitte stellen Sie sicher, dass Sie
+  chrome-php/chrome \xFCber composer installieren"
+web2print_chromium_settings: Chromium Requirements
+web2print_chromium_documentation: Option Dokumentation
+web2print_chromium_options_documentation: "Bitte stellen Sie sicher, dass die folgende
+  Konfiguration mit der in der Chrome DevTools-Dokumentation verf\xFCgbaren Option
+  \xFCbereinstimmt, da andere Werte die PDF-Generierung beeintr\xE4chtigen k\xF6nnen"
 web2print_chromium_documentation_additions: Additional Options
-web2print_chromium_documentation_additions_text: 'There are two additional options:
-  "header" and "footer". This options need a URL, which returns the header or footer
-  template.'
+web2print_chromium_documentation_additions_text: "Es gibt zwei zus\xE4tzliche Optionen:
+  \"Kopfzeile\" und \"Fu\xDFzeile\". Diese Optionen ben\xF6tigen eine URL, die die
+  Kopf- oder Fu\xDFzeilenvorlage zur\xFCckgibt."
 web2print_chromium_documentation_docker: Notes for Dockerized Chromium
-web2print_chromium_documentation_docker_text: When using a Dockerized Chromium through
-  WebSocket, the following field must be set to the web server service accordingly.
-  eg. `http://nginx:80`
+web2print_chromium_documentation_docker_text: "Bei der Verwendung von Dockerized Chromium
+  \xFCber WebSocket muss das folgende Feld f\xFCr den Webserverdienst entsprechend
+  gesetzt werden, z. B. `http://nginx:80`."
 web2print_hostURL: Host Url
 ...

@@ -1,6 +1,6 @@
 {
     "name": "pimcore/web-to-print-bundle",
-    "license": "GPL-3.0+",
+    "license": "GPL-3.0-or-later",
     "type": "pimcore-bundle",
     "description": "Pimcore WebToPrint Bundle",
     "config": {
@@ -24,6 +24,10 @@
       "codeception/codeception": "^5.0.3",
       "codeception/module-symfony": "^3.1.0",
       "codeception/phpunit-wrapper": "^9"
+    },
+    "suggest": {
+      "gotenberg/gotenberg-php": "Required for generating pdf via Gotenberg in assets preview (LibreOffice), page preview, version diff and web2print",
+      "chrome-php/chrome": "Required for Documents Page Previews"
     },
     "autoload": {
         "psr-4": {
