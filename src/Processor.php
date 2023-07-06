@@ -253,6 +253,7 @@ abstract class Processor
     {
         $document = $params['document'] ?? null;
         $hostUrl = $params['hostUrl'] ?? null;
+        $processor = $params['processor'] ?? null;
         $templatingEngine = \Pimcore::getContainer()->get('pimcore.templating.engine.delegating');
 
         try {
@@ -266,6 +267,10 @@ abstract class Processor
             throw new \Exception(sprintf('Failed rendering the print template: %s. Please check your twig sandbox security policy or contact the administrator.', $e->getMessage()));
         } finally {
             $templatingEngine->disableSandboxExtensionFromTwigEnvironment();
+        }
+
+        if ($processor instanceof Gotenberg) {
+            return $html;
         }
 
         return Mail::setAbsolutePaths($html, $document, $hostUrl);
