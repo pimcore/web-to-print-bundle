@@ -41,7 +41,7 @@ class Gotenberg extends Processor
         $html = $document->renderDocument($params);
 
         $params['hostUrl'] = 'http://nginx:80';
-        if (isset($web2printConfig['gotenbergHostUrl']) && !empty($web2printConfig['gotenbergHostUrl'])) {
+        if (!empty($web2printConfig['gotenbergHostUrl'])) {
             $params['hostUrl'] = $web2printConfig['gotenbergHostUrl'];
         }
 
