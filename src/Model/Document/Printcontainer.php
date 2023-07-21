@@ -42,7 +42,7 @@ class Printcontainer extends PrintAbstract
      *
      * @internal
      */
-    public function getTreeNodeConfig(): array
+    public function getDocumentTreeNodeConfig(): array
     {
         $tmpDocument = [];
         $tmpDocument['leaf'] = false;
