@@ -65,18 +65,8 @@ pimcore.document.printcontainer = Class.create(pimcore.document.printabstract, {
             items.push(this.workflows.getLayout());
         }
 
-        this.tabbar = new Ext.TabPanel({
-            tabPosition: "top",
-            region:'center',
-            deferredRender:true,
-            enableTabScroll:true,
-            defaults: {autoScroll:true},
-            border: false,
-            items: items,
-            activeTab: 0
-        });
+        this.tabbar = pimcore.helpers.getTabBar({items: items, defaults: {autoScroll:true}});
         return this.tabbar;
     }
-
 });
 
