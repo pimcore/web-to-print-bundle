@@ -17,7 +17,6 @@ declare(strict_types=1);
 namespace Pimcore\Bundle\WebToPrintBundle;
 
 use Doctrine\DBAL\ArrayParameterType;
-use Doctrine\DBAL\Connection;
 use Pimcore\Db;
 use Pimcore\Extension\Bundle\Installer\SettingsStoreAwareInstaller;
 use Pimcore\Model\Tool\SettingsStore;
@@ -76,7 +75,7 @@ class Installer extends SettingsStoreAwareInstaller
 
     private function addUserPermission(): void
     {
-        $db = \Pimcore\Db::get();
+        $db = Db::get();
 
         foreach (self::USER_PERMISSIONS as $permission) {
             // check if the permission already exists
@@ -92,7 +91,7 @@ class Installer extends SettingsStoreAwareInstaller
 
     private function removeUserPermission(): void
     {
-        $db = \Pimcore\Db::get();
+        $db = Db::get();
 
         foreach (self::USER_PERMISSIONS as $permission) {
             $db->delete('users_permission_definitions', [
@@ -105,7 +104,7 @@ class Installer extends SettingsStoreAwareInstaller
     {
         $sqlPath = __DIR__ . '/Resources/install/';
         $sqlFileNames = ['install.sql'];
-        $db = \Pimcore\Db::get();
+        $db = Db::get();
 
         foreach ($sqlFileNames as $fileName) {
             $statement = file_get_contents($sqlPath.$fileName);
@@ -122,7 +121,7 @@ class Installer extends SettingsStoreAwareInstaller
             $typeColumn = $result->fetchAllAssociative();
 
             return explode("','", preg_replace("/(enum)\('(.+?)'\)/", '\\2', $typeColumn[0]['Type']));
-        } catch (\Exception $ex) {
+        } catch (\Exception) {
             // nothing to do here if it does not work we return the standard types
         }
 
@@ -131,21 +130,17 @@ class Installer extends SettingsStoreAwareInstaller
 
     private function modifyEnumTypes(array $enums): void
     {
-        $type = Connection::PARAM_STR_ARRAY;
-        if (class_exists('Doctrine\\DBAL\\ArrayParameterType')) {
-            $type = ArrayParameterType::STRING;
-        }
         $db = Db::get();
-        $db->executeQuery('ALTER TABLE documents MODIFY COLUMN `type` ENUM(:enums);', ['enums' => $enums], ['enums' => $type]);
+        $db->executeQuery('ALTER TABLE documents MODIFY COLUMN `type` ENUM(:enums);', ['enums' => $enums], ['enums' => ArrayParameterType::STRING]);
     }
 
     private function removePrintDocTypes(): void
     {
-        foreach(SettingsStore::getIdsByScope(self::SETTINGS_STORE_SCOPE) as $id) {
+        foreach (SettingsStore::getIdsByScope(self::SETTINGS_STORE_SCOPE) as $id) {
             $printDocTypes = SettingsStore::get($id, self::SETTINGS_STORE_SCOPE);
-            if($printDocTypes) {
+            if ($printDocTypes) {
                 $data = json_decode($printDocTypes->getData(), true);
-                if(!empty($data) && in_array($data['type'], self::DOCTYPES)) {
+                if (!empty($data) && in_array($data['type'], self::DOCTYPES)) {
                     SettingsStore::delete($id, self::SETTINGS_STORE_SCOPE);
                 }
             }
