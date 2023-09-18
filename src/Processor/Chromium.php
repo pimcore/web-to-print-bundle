@@ -116,6 +116,7 @@ class Chromium extends Processor
                 'startupTimeout' => 120,
                 'enableImages' => true,
                 'ignoreCertificateErrors' => true,
+                'customFlags'    => [ '--disable-dev-shm-usage','--disable-gpu']                                     
             ]);
         }
 
