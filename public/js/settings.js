@@ -328,7 +328,7 @@ pimcore.bundle.web2print.settings = Class.create({
                                 fieldLabel: t("web2print_tool"),
                                 xtype: "combo",
                                 width: 600,
-                                editable: false,
+                                editable: true,
                                 name: "generalTool",
                                 value: this.getValue("generalTool"),
                                 store: [

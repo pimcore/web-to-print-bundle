@@ -16,3 +16,5 @@ This bundle introduces 2 new document types:
 | [PDF Reactor](https://www.pdfreactor.com/) | A REST/SOAP solution, please visit the official website for further information                                                                                          | 
 
  > For details on how to install and configure these processors, please see [Additional Tools Installation](https://pimcore.com/docs/platform/Pimcore/Installation_and_Upgrade/System_Setup_and_Hosting/Additional_Tools_Installation) page in the Core.
+
+You can also add your own Processors as long as they extend the abstract Pimcore\Bundle\WebToPrintBundle\Processor class. Set the full class name in the web2print settings, for example "App\Web2Print\Processor\WkHtmlToPdf".

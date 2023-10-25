@@ -40,12 +40,25 @@ abstract class Processor
     {
         $config = Config::getWeb2PrintConfig();
 
-        return match ($config['generalTool']) {
-            'pdfreactor' => new PdfReactor(),
-            'chromium' => new Chromium(),
-            'gotenberg' => new Gotenberg(),
-            default => throw new \Exception('Invalid Configuration - ' . $config['generalTool'])
-        };
+        if($config['generalTool'] == 'pdfreactor'){
+            return new PdfReactor();
+        }
+        elseif($config['generalTool'] == 'chromium'){
+            return new Chromium();
+        }
+        elseif($config['generalTool'] == 'gotenberg'){
+            return new Gotenberg();
+        }
+        else{
+            if(class_exists($config['generalTool'])){
+                $generalToolClass = new $config['generalTool']();
+                if($generalToolClass instanceof Processor){
+                    return $generalToolClass;
+                }
+            }
+        }
+
+        throw new \Exception('Invalid Configuration - ' . $config['generalTool']);
     }
 
     /**
