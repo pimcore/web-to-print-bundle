@@ -65,7 +65,7 @@ pimcore.document.printcontainer = Class.create(pimcore.document.printabstract, {
             items.push(this.workflows.getLayout());
         }
 
-        this.tabbar = pimcore.helpers.getTabBar({items: items, defaults: {autoScroll:true}});
+        this.tabbar = pimcore.helpers.getTabBar({items: items, defaults: {autoScroll:true}, height: 46});
         return this.tabbar;
     }
 });
