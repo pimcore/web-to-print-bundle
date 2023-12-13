@@ -92,7 +92,7 @@ pimcore.document.printpages.pdfpreview = Class.create({
                 style: "float: right; margin-top: 10px",
                 handler: function () {
                     var date = new Date();
-                    var url = Routing.generate('pimcore_bundle_document_printpage_pdfdownload', {id: this.page.id, download: 1, time: date.getTime()});
+                    var url = Routing.generate('pimcore_bundle_web2print_document_printpage_pdfdownload', {id: this.page.id, download: 1, time: date.getTime()});
                     pimcore.helpers.download(url);
                 }.bind(this)
             });
