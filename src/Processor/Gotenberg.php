@@ -106,6 +106,9 @@ class Gotenberg extends Processor
         $tempFileName = uniqid('web2print_');
 
         $chromium = GotenbergAPI::chromium(\Pimcore\Config::getSystemConfiguration('gotenberg')['base_url']);
+        if (method_exists($chromium, 'pdf')) {
+            $chromium = $chromium->pdf();
+        }
 
         $options = [
             'printBackground', 'landscape', 'preferCssPageSize', 'omitBackground', 'emulatePrintMediaType',
@@ -134,7 +137,7 @@ class Gotenberg extends Processor
         }
 
         foreach (['header', 'footer'] as $item) {
-            if (isset($params[$item . 'Template'])) {
+            if (isset($params[$item . 'Template']) && method_exists($chromium, $item)) {
                 $chromium->$item(Stream::path($params[$item . 'Template']));
             }
         }
@@ -143,7 +146,7 @@ class Gotenberg extends Processor
             $chromium->paperSize($params['paperWidth'] ?? 8.5, $params['paperHeight'] ?? 11);
         }
 
-        if (isset($params['userAgent'])) {
+        if (isset($params['userAgent']) && method_exists($chromium, 'userAgent')) {
             $chromium->userAgent($params['userAgent']);
         }
 
@@ -151,7 +154,7 @@ class Gotenberg extends Processor
             $chromium->extraHttpHeaders($params['extraHttpHeaders']);
         }
 
-        if (isset($params['pdfFormat'])) {
+        if (isset($params['pdfFormat']) && method_exists($chromium, 'pdfFormat')) {
             $chromium->pdfFormat($params['pdfFormat']);
         }
 
