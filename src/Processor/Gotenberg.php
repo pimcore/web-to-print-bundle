@@ -155,16 +155,9 @@ class Gotenberg extends Processor
             $chromium->paperSize($params['paperWidth'] ?? 8.5, $params['paperHeight'] ?? 11);
         }
 
-        if (isset($params['userAgent']) && method_exists($chromium, 'userAgent')) {
-            $chromium->userAgent($params['userAgent']);
-        }
 
         if (isset($params['extraHttpHeaders'])) {
             $chromium->extraHttpHeaders($params['extraHttpHeaders']);
-        }
-
-        if (isset($params['pdfFormat']) && method_exists($chromium, 'pdfFormat')) {
-            $chromium->pdfFormat($params['pdfFormat']);
         }
 
         $request = $chromium->outputFilename($tempFileName)->html(Stream::string('processor.html', $html));
