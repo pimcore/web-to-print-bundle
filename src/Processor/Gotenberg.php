@@ -137,7 +137,7 @@ class Gotenberg extends Processor
         }
 
         foreach (['header', 'footer'] as $item) {
-            if (isset($params[$item . 'Template']) && method_exists($chromium, $item)) {
+            if (isset($params[$item . 'Template'])) {
                 $chromium->$item(Stream::path($params[$item . 'Template']));
             }
         }
