@@ -106,8 +106,17 @@ class Gotenberg extends Processor
         $tempFileName = uniqid('web2print_');
 
         $chromium = GotenbergAPI::chromium(\Pimcore\Config::getSystemConfiguration('gotenberg')['base_url']);
+        // To support gotenberg-php v2 and so on
         if (method_exists($chromium, 'pdf')) {
             $chromium = $chromium->pdf();
+        } else {
+            // gotenberg-php v1 BC Layer for unsupported methods in v2
+            if (isset($params['userAgent'])) {
+               $chromium->userAgent($params['userAgent']);
+            }
+            if (isset($params['pdfFormat'])) {
+               $chromium->pdfFormat($params['pdfFormat']);
+            }
         }
 
         $options = [
