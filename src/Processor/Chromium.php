@@ -132,11 +132,10 @@ class Chromium extends Processor
             } else {
                 $output = base64_decode($pdf->getBase64());
             }
+            $page->close();
         } catch (\Throwable $e) {
             Logger::debug('Could not create pdf with chromium: '. print_r($e, true));
-            $output = (string) $e;
-        } finally {
-            $page->close();
+            $output = (string) $e; 
         }
 
         return $output;
