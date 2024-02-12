@@ -136,7 +136,7 @@ class Chromium extends Processor
             Logger::debug('Could not create pdf with chromium: '. print_r($e, true));
             $output = (string) $e;
         } finally {
-            $browser->close();
+            $page->close();
         }
 
         return $output;
