@@ -121,6 +121,7 @@ class Chromium extends Processor
         }
 
         $page = $browser->createPage();
+
         try {
             $page->setHtml($html, 5000);
 
