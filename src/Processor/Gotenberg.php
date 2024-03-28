@@ -159,6 +159,10 @@ class Gotenberg extends Processor
             $chromium->extraHttpHeaders($params['extraHttpHeaders']);
         }
 
+        if (isset($params['metadata'])) {
+            $chromium->metadata($params['metadata']);
+        }
+
         $request = $chromium->outputFilename($tempFileName)->html(Stream::string('processor.html', $html));
 
         if ($returnFilePath) {
