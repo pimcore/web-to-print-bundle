@@ -20,7 +20,7 @@
   "require-dev": {
     "phpstan/phpstan": "^1.10.5",
     "phpstan/phpstan-symfony": "^1.2.20",
-    "gotenberg/gotenberg-php": "^1.0 || ^2.0",
+    "gotenberg/gotenberg-php": "^1.1.8 || ^2.2",
     "chrome-php/chrome": "^1.8",
     "codeception/codeception": "^5.0.3",
     "codeception/module-symfony": "^3.1.0",
