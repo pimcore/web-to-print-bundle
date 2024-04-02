@@ -162,8 +162,7 @@ class Gotenberg extends Processor
         if (isset($params['metadata'])) {
             if (method_exists($chromium, 'metadata')) {
                 $chromium->metadata($params['metadata']);
-            } else {
-                /* @phpstan-ignore-next-line */
+            } elseif (is_callable([$chromium, 'formValue'])) {
                 $chromium->formValue('metadata', json_encode($params['metadata']));
             }
         }
