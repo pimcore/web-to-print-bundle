@@ -160,11 +160,9 @@ class Gotenberg extends Processor
         }
 
         if (isset($params['metadata'])) {
-            if (method_exists($chromium, 'metadata')) {
-                $chromium->metadata($params['metadata']);
-            } else {
-                $chromium->formValue('metadata', json_encode($params['metadata']));
-            }
+          // TODO: Replace with metadata() once dropping support for gotenberg-php < 2.2.0
+          $chromium->formValue('metadata', json_encode($params['metadata']));
+            
         }
 
         $request = $chromium->outputFilename($tempFileName)->html(Stream::string('processor.html', $html));
