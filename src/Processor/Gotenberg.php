@@ -85,7 +85,7 @@ class Gotenberg extends Processor
 
         $html = $this->processHtml($html, $processParams);
 
-        $gotenbergSettings = $web2printConfig['gotenbergSettings'];
+        $gotenbergSettings = $web2printConfig['gotenbergSettings'] ?? '';
         $gotenbergSettings = json_decode($gotenbergSettings, true);
 
         if ($gotenbergSettings) {
