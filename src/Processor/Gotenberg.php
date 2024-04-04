@@ -24,6 +24,10 @@ use Pimcore\Bundle\WebToPrintBundle\Event\Model\PrintConfigEvent;
 use Pimcore\Bundle\WebToPrintBundle\Model\Document\PrintAbstract;
 use Pimcore\Bundle\WebToPrintBundle\Processor;
 use Pimcore\Logger;
+use function array_merge;
+use function file_exists;
+use function json_decode;
+use function key_exists;
 
 class Gotenberg extends Processor
 {
@@ -32,35 +36,15 @@ class Gotenberg extends Processor
      */
     protected function buildPdf(PrintAbstract $document, object $config): string
     {
-        $web2printConfig = Config::getWeb2PrintConfig();
-        $gotenbergSettings = $web2printConfig['gotenbergSettings'];
-        $gotenbergSettings = json_decode($gotenbergSettings, true);
-
         $params = ['document' => $document];
         $this->updateStatus($document->getId(), 10, 'start_html_rendering');
         $html = $document->renderDocument($params);
 
-        $params['hostUrl'] = 'http://nginx:80';
-        if (!empty($web2printConfig['gotenbergHostUrl'])) {
-            $params['hostUrl'] = $web2printConfig['gotenbergHostUrl'];
-        }
-
-        $html = $this->processHtml($html, $params);
         $this->updateStatus($document->getId(), 40, 'finished_html_rendering');
-
-        if ($gotenbergSettings) {
-            foreach (['header', 'footer'] as $item) {
-                if (key_exists($item, $gotenbergSettings) && $gotenbergSettings[$item] &&
-                    file_exists($gotenbergSettings[$item])) {
-                    $gotenbergSettings[$item . 'Template'] = $gotenbergSettings[$item];
-                }
-                unset($gotenbergSettings[$item]);
-            }
-        }
 
         try {
             $this->updateStatus($document->getId(), 50, 'pdf_conversion');
-            $pdf = $this->getPdfFromString($html, $gotenbergSettings ?? []);
+            $pdf = $this->getPdfFromString($html);
             $this->updateStatus($document->getId(), 100, 'saving_pdf_document');
         } catch (\Exception $e) {
             Logger::error((string) $e);
@@ -92,6 +76,30 @@ class Gotenberg extends Processor
      */
     public function getPdfFromString(string $html, array $params = [], bool $returnFilePath = false): string
     {
+        $web2printConfig = Config::getWeb2PrintConfig();
+
+        $processParams['hostUrl'] = 'http://nginx:80';
+        if (!empty($web2printConfig['gotenbergHostUrl'])) {
+            $processParams['hostUrl'] = $web2printConfig['gotenbergHostUrl'];
+        }
+
+        $html = $this->processHtml($html, $processParams);
+
+        $gotenbergSettings = $web2printConfig['gotenbergSettings'];
+        $gotenbergSettings = json_decode($gotenbergSettings, true);
+
+        if ($gotenbergSettings) {
+            foreach (['header', 'footer'] as $item) {
+                if (key_exists($item, $gotenbergSettings) && $gotenbergSettings[$item] &&
+                    file_exists($gotenbergSettings[$item])) {
+                    $gotenbergSettings[$item . 'Template'] = $gotenbergSettings[$item];
+                }
+                unset($gotenbergSettings[$item]);
+            }
+
+            $params = array_merge($params, $gotenbergSettings);
+        }
+
         $params = $params ?: $this->getDefaultOptions();
 
         $event = new PrintConfigEvent($this, [
