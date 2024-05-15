@@ -40,6 +40,10 @@ pimcore.bundle.web2print.startup = Class.create({
         var menu = e.detail.menu;
         var tree = e.detail.tree;
         var me = this;
+        const perspectiveCfg = pimcore.globalmanager.get("perspective");
+
+        const addPrintDocuments = perspectiveCfg.inTreeContextMenu("document.addPrintPage");
+        const addBlankPrintDocuments = perspectiveCfg.inTreeContextMenu("document.addBlankPrintPage");
 
         if (tree.tree.getSelectionModel().getSelected().length > 1) {
             return;
@@ -56,19 +60,21 @@ pimcore.bundle.web2print.startup = Class.create({
         if (childSupportedDocument && document.data.permissions.create) {
             documentMenu = this.populatePredefinedDocumentTypes(documentMenu, tree, document);
 
-            // empty print pages
-            documentMenu.printPage.push({
-                text: "&gt; " + t("add_printpage"),
-                iconCls: "pimcore_icon_printpage pimcore_icon_overlay_add",
-                handler: me.addDocument.bind(tree, tree, document, "printpage")
-            });
-            documentMenu.printPage.push({
-                text: "&gt; " + t("add_printcontainer"),
-                iconCls: "pimcore_icon_printcontainer pimcore_icon_overlay_add",
-                handler: me.addDocument.bind(tree, tree, document, "printcontainer")
-            });
+            if (addBlankPrintDocuments) {
+                // empty print pages
+                documentMenu.printPage.push({
+                    text: "&gt; " + t("add_printpage"),
+                    iconCls: "pimcore_icon_printpage pimcore_icon_overlay_add",
+                    handler: me.addDocument.bind(tree, tree, document, "printpage")
+                });
+                documentMenu.printPage.push({
+                    text: "&gt; " + t("add_printcontainer"),
+                    iconCls: "pimcore_icon_printcontainer pimcore_icon_overlay_add",
+                    handler: me.addDocument.bind(tree, tree, document, "printcontainer")
+                });
+            }
 
-            if (document.data.type != "email" && document.data.type != "newsletter" && document.data.type != "link") {
+            if (addPrintDocuments && document.data.type != "email" && document.data.type != "newsletter" && document.data.type != "link") {
                 menu.insert(0, new Ext.menu.Item({
                     text: t('add_printpage'),
                     iconCls: "pimcore_icon_printpage pimcore_icon_overlay_add",
