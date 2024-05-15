@@ -40,7 +40,7 @@ pimcore.bundle.web2print.startup = Class.create({
         var menu = e.detail.menu;
         var tree = e.detail.tree;
         var me = this;
-        const perspectiveCfg = pimcore.globalmanager.get("perspective");
+        const perspectiveCfg = tree.perspectiveCfg;
 
         const addPrintDocuments = perspectiveCfg.inTreeContextMenu("document.addPrintPage");
         const addBlankPrintDocuments = perspectiveCfg.inTreeContextMenu("document.addBlankPrintPage");
