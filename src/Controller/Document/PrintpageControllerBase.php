@@ -42,7 +42,7 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
      *
      * @return JsonResponse
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function getDataByIdAction(Request $request): JsonResponse
     {
@@ -250,7 +250,7 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
      *
      * @return JsonResponse
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function activeGenerateProcessAction(Request $request): JsonResponse
     {
@@ -276,7 +276,7 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
             'activeGenerateProcess' => !empty($inProgress),
             'date' => $date,
             'message' => $document->getLastGenerateMessage(),
-            'downloadAvailable' => file_exists($document->getPdfFileName()),
+            'downloadAvailable' => $this->checkFileExists($document->getPdfFileName()),
             'statusUpdate' => $statusUpdate,
         ]);
     }
@@ -288,7 +288,7 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
      *
      * @return BinaryFileResponse
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function pdfDownloadAction(Request $request): BinaryFileResponse
     {
@@ -298,7 +298,7 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
             throw $this->createNotFoundException('Document with id ' . $request->get('id') . ' not found.');
         }
 
-        if (file_exists($document->getPdfFileName())) {
+        if ($this->checkFileExists($document->getPdfFileName())) {
             $response = new BinaryFileResponse($document->getPdfFileName());
             $response->headers->set('Content-Type', 'application/pdf');
             if ($request->get('download')) {
@@ -319,7 +319,7 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
      *
      * @return JsonResponse
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function startPdfGenerationAction(Request $request, \Pimcore\Config $config): JsonResponse
     {
@@ -404,7 +404,7 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
     private function getStoredProcessingOptions(int $documentId): array
     {
         $filename = PIMCORE_SYSTEM_TEMP_DIRECTORY . DIRECTORY_SEPARATOR . 'web2print-processingoptions-' . $documentId . '_' . $this->getAdminUser()->getId() . '.psf';
-        if (file_exists($filename)) {
+        if ($this->checkFileExists($filename)) {
             $options = \Pimcore\Tool\Serialize::unserialize(file_get_contents($filename));
             if (is_array($options)) {
                 return $options;
@@ -426,12 +426,44 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
      *
      * @return JsonResponse
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function cancelGenerationAction(Request $request): JsonResponse
     {
         Processor::getInstance()->cancelGeneration((int)$request->get('id'));
 
         return $this->adminJson(['success' => true]);
+    }
+
+    /**
+     * Checks if a file exists on the filesystem.
+     *
+     * @param string $filePath
+     *
+     * @return bool
+     */
+    private function checkFileExists(string $filePath): bool
+    {
+        $this->invalidateFsCacheFor($filePath);
+
+        return file_exists($filePath);
+    }
+
+    /**
+     * Invalidates the FS cache for a given file path by opening and closing the directory.
+     * This is a workaround for a bug which happens when the local filesystem is using a NFS with cache.
+     *
+     * @param string $filePath
+     *
+     * @return void
+     */
+    private function invalidateFsCacheFor(string $filePath): void
+    {
+        try {
+            if ($dh = opendir(dirname($filePath))) {
+                closedir($dh);
+            }
+        } catch (Exception) {
+        }
     }
 }
