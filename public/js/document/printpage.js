@@ -41,7 +41,9 @@ pimcore.document.printpage = Class.create(pimcore.document.printabstract, {
             this.versions = new pimcore.document.versions(this);
         }
 
-        this.dependencies = new pimcore.element.dependencies(this, "document");
+        if (typeof pimcore.settings.dependency === 'undefined' || pimcore.settings.dependency) {
+            this.dependencies = new pimcore.element.dependencies(this, "document");
+        }
         this.preview = new pimcore.document.pages.preview(this);
         this.pdfpreview = new pimcore.document.printpages.pdfpreview(this);
         this.workflows = new pimcore.element.workflows(this, "document");
@@ -65,7 +67,9 @@ pimcore.document.printpage = Class.create(pimcore.document.printabstract, {
             items.push(this.versions.getLayout());
         }
 
-        items.push(this.dependencies.getLayout());
+        if (typeof this.dependencies !== "undefined") {
+            items.push(this.dependencies.getLayout());
+        }
 
         if (user.isAllowed("notes_events")) {
             items.push(this.notes.getLayout());
