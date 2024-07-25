@@ -40,7 +40,7 @@ jobs:
                 include:
                     - { php-version: 8.1, database: "mariadb:10.3", dependencies: lowest, experimental: false }
                     - { php-version: 8.2, database: "mariadb:10.11", dependencies: highest, experimental: false }
-                    - { php-version: 8.3, database: "mariadb:10.11", dependencies: highest, pimcore_version: "dev-branch-alias", experimental: true }
+                    - { php-version: 8.3, database: "mariadb:10.11", dependencies: highest, pimcore_version: "11.x-dev", experimental: true }
 
         services:
             redis:
