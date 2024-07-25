@@ -31,6 +31,9 @@
     "gotenberg/gotenberg-php": "Required for generating pdf via Gotenberg in assets preview (LibreOffice), page preview, version diff and web2print",
     "chrome-php/chrome": "Required for Documents Page Previews"
   },
+  "conflict": {
+     "symfony/string": "<6.0"
+  },
   "autoload": {
     "psr-4": {
       "Pimcore\\Bundle\\WebToPrintBundle\\": "src/"
