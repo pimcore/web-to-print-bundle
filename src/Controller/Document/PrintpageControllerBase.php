@@ -42,7 +42,7 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
      */
     public function getDataByIdAction(Request $request): JsonResponse
     {
-        $page = PrintAbstract::getById((int)$request->get('id'));
+        $page = PrintAbstract::getById($request->query->getInt('id'));
 
         if (!$page) {
             throw $this->createNotFoundException('Document not found');
@@ -90,7 +90,7 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
      */
     public function saveAction(Request $request): JsonResponse
     {
-        $page = PrintAbstract::getById((int) $request->get('id'));
+        $page = PrintAbstract::getById($request->request->getInt('id'));
         if (!$page) {
             throw $this->createNotFoundException('Document not found');
         }
@@ -99,7 +99,7 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
 
         Document\Service::saveElementToSession($page, $request->getSession()->getId());
 
-        if ($request->get('task') !== self::TASK_SAVE) {
+        if ($request->query->getString('task') !== self::TASK_SAVE) {
             //check, if to cleanup existing elements of document
             $config = Config::get();
             if ($config['generalDocumentSaveMode'] == 'cleanup') {
@@ -145,10 +145,10 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
         $errorMessage = '';
 
         // check for permission
-        $parentDocument = Document::getById((int)$request->get('parentId'));
+        $parentDocument = Document::getById($request->request->getInt('parentId'));
         $document = null;
         if ($parentDocument->isAllowed('create')) {
-            $intendedPath = $parentDocument->getRealFullPath() . '/' . $request->get('key');
+            $intendedPath = $parentDocument->getRealFullPath() . '/' . $request->request->getString('key');
 
             if (!Document\Service::pathExists($intendedPath)) {
                 $createValues = [
@@ -157,27 +157,27 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
                     'published' => false,
                 ];
 
-                $createValues['key'] = \Pimcore\Model\Element\Service::getValidKey($request->get('key'), 'document');
+                $createValues['key'] = \Pimcore\Model\Element\Service::getValidKey($request->request->getString('key'), 'document');
 
                 // check for a docType
-                $docType = Document\DocType::getById($request->get('docTypeId', ''));
+                $docType = Document\DocType::getById($request->request->getString('docTypeId', ''));
                 if ($docType) {
                     $createValues['template'] = $docType->getTemplate();
                     $createValues['controller'] = $docType->getController();
                 } else {
                     $config = $this->getParameter('pimcore_web_to_print');
-                    if ($request->get('type') === 'printpage') {
+                    if ($request->request->getString('type') === 'printpage') {
                         $createValues['controller'] = $config['default_controller_print_page'];
-                    } elseif ($request->get('type') === 'printcontainer') {
+                    } elseif ($request->request->getString('type') === 'printcontainer') {
                         $createValues['controller'] = $config['default_controller_print_container'];
                     }
                 }
 
-                if ($request->get('inheritanceSource')) {
-                    $createValues['contentMainDocumentId'] = $request->get('inheritanceSource');
+                if ($request->request->has('inheritanceSource')) {
+                    $createValues['contentMainDocumentId'] = $request->request->getInt('inheritanceSource');
                 }
 
-                $className = \Pimcore::getContainer()->get('pimcore.class.resolver.document')->resolve($request->get('type'));
+                $className = \Pimcore::getContainer()->get('pimcore.class.resolver.document')->resolve($request->request->getString('type'));
 
                 /** @var Document $document */
                 $document = \Pimcore::getContainer()->get('pimcore.model.factory')->build($className);
@@ -200,13 +200,13 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
         }
 
         if ($success && $document instanceof Document) {
-            if ($translationsBaseDocumentId = $request->get('translationsBaseDocument')) {
-                $translationsBaseDocument = Document::getById((int) $translationsBaseDocumentId);
+            if ($translationsBaseDocumentId = $request->request->getInt('translationsBaseDocument')) {
+                $translationsBaseDocument = Document::getById($translationsBaseDocumentId);
 
                 $properties = $translationsBaseDocument->getProperties();
                 $properties = array_merge($properties, $document->getProperties());
                 $document->setProperties($properties);
-                $document->setProperty('language', 'text', $request->get('language'), false, true);
+                $document->setProperty('language', 'text', $request->request->getString('language'), false, true);
                 $document->save();
 
                 $service = new Document\Service();
@@ -240,10 +240,10 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
      */
     public function activeGenerateProcessAction(Request $request): JsonResponse
     {
-        $document = PrintAbstract::getById((int)$request->get('id'));
+        $document = PrintAbstract::getById($request->request->getInt('id'));
 
         if (!$document) {
-            throw $this->createNotFoundException('Document with id ' . $request->get('id') . ' not found.');
+            throw $this->createNotFoundException('Document with id ' . $request->request->getInt('id') . ' not found.');
         }
 
         $date = $document->getLastGeneratedDate();
@@ -274,16 +274,16 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
      */
     public function pdfDownloadAction(Request $request): BinaryFileResponse
     {
-        $document = PrintAbstract::getById((int)$request->get('id'));
+        $document = PrintAbstract::getById($request->query->getInt('id'));
 
         if (!$document) {
-            throw $this->createNotFoundException('Document with id ' . $request->get('id') . ' not found.');
+            throw $this->createNotFoundException('Document with id ' . $request->query->getInt('id') . ' not found.');
         }
 
         if ($this->checkFileExists($document->getPdfFileName())) {
             $response = new BinaryFileResponse($document->getPdfFileName());
             $response->headers->set('Content-Type', 'application/pdf');
-            if ($request->get('download')) {
+            if ($request->query->has('download')) {
                 $response->setContentDisposition('attachment', $document->getKey() . '.pdf');
             }
 
@@ -333,7 +333,7 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
      */
     public function checkPdfDirtyAction(Request $request): JsonResponse
     {
-        $printDocument = PrintAbstract::getById((int) $request->get('id'));
+        $printDocument = PrintAbstract::getById($request->query->getInt('id'));
 
         $dirty = true;
         if ($printDocument) {
@@ -354,7 +354,7 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
 
         $returnValue = [];
 
-        $storedValues = $this->getStoredProcessingOptions((int) $request->query->get('id'));
+        $storedValues = $this->getStoredProcessingOptions($request->query->getInt('id'));
 
         foreach ($options as $option) {
             $value = $option['default'];
@@ -399,7 +399,7 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
      */
     public function cancelGenerationAction(Request $request): JsonResponse
     {
-        Processor::getInstance()->cancelGeneration((int)$request->get('id'));
+        Processor::getInstance()->cancelGeneration($request->request->getInt('id'));
 
         return $this->adminJson(['success' => true]);
     }

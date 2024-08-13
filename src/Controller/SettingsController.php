@@ -64,7 +64,7 @@ class SettingsController extends UserAwareController
     {
         $this->checkPermission('web2print_settings');
 
-        $values = $this->decodeJson($request->get('data'));
+        $values = $this->decodeJson($request->request->getString('data'));
 
         unset(
             $values['documentation'],
