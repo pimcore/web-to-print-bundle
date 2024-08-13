@@ -160,7 +160,7 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
                 $createValues['key'] = \Pimcore\Model\Element\Service::getValidKey($request->request->getString('key'), 'document');
 
                 // check for a docType
-                $docType = Document\DocType::getById($request->request->getString('docTypeId', ''));
+                $docType = Document\DocType::getById($request->request->getString('docTypeId'));
                 if ($docType) {
                     $createValues['template'] = $docType->getTemplate();
                     $createValues['controller'] = $docType->getController();
