@@ -40,16 +40,16 @@ abstract class Processor
     {
         $config = Config::getWeb2PrintConfig();
 
-        if($config['generalTool'] == 'pdfreactor') {
+        if ($config['generalTool'] == 'pdfreactor') {
             return new PdfReactor();
-        } elseif($config['generalTool'] == 'chromium') {
+        } elseif ($config['generalTool'] == 'chromium') {
             return new Chromium();
-        } elseif($config['generalTool'] == 'gotenberg') {
+        } elseif ($config['generalTool'] == 'gotenberg') {
             return new Gotenberg();
         } else {
-            if(class_exists($config['generalTool'])) {
+            if (class_exists($config['generalTool'])) {
                 $generalToolClass = new $config['generalTool']();
-                if($generalToolClass instanceof Processor) {
+                if ($generalToolClass instanceof Processor) {
                     return $generalToolClass;
                 }
             }
