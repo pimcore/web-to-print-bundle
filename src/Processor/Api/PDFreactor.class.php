@@ -105,6 +105,9 @@ class PDFreactor
                 }
             }
         }
+        if(!$result) {
+            throw $this->_createServerException('serviceUnavailable', 'PDFreactor Web Service is unavailable.', $result);
+        }
         if ($status == 422) {
             throw $this->_createServerException($errorId, $result->error, $result);
         } elseif ($status == 400) {
