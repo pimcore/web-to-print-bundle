@@ -16,6 +16,7 @@ declare(strict_types=1);
 
 namespace Pimcore\Bundle\WebToPrintBundle\Tests\Model\Processor;
 
+use com\realobjects\pdfreactor\webservice\client\ServiceUnavailableException;
 use Pimcore\Bundle\WebToPrintBundle\Config;
 use Pimcore\Bundle\WebToPrintBundle\Processor;
 use Pimcore\Document\Adapter\Ghostscript;
@@ -68,7 +69,12 @@ class ProcessorTest extends ModelTestCase
 
         $processorClass = 'Pimcore\Bundle\WebToPrintBundle\Processor\\'.$processorName;
         $processor = new $processorClass();
-        $pdfContent = $this->getPDFfromProcessor($processor, $config);
+
+        try {
+            $pdfContent = $this->getPDFfromProcessor($processor, $config);
+        } catch (ServiceUnavailableException $e) {
+            $this->incomplete('Service Unavailable: ' . $e->getMessage());
+        }
 
         $file = tmpfile();
         $tempMetadata = stream_get_meta_data($file);
