@@ -73,7 +73,7 @@ class ProcessorTest extends ModelTestCase
         try {
             $pdfContent = $this->getPDFfromProcessor($processor, $config);
         } catch (ServiceUnavailableException $e) {
-            $this->incomplete('Service Unavailable: ' . $e->getMessage());
+            $this->markTestIncomplete('Service Unavailable: ' . $e->getMessage());
         }
 
         $file = tmpfile();
@@ -97,6 +97,9 @@ class ProcessorTest extends ModelTestCase
 
     }
 
+    /**
+     * @throws ServiceUnavailableException
+     */
     private function getPDFfromProcessor(Processor $processor, array $config): string
     {
         $html =  file_get_contents(__DIR__.'/../../Support/Resources/test_web2print.html.twig');
