@@ -19,7 +19,6 @@ namespace Pimcore\Bundle\WebToPrintBundle\Processor;
 use com\realobjects\pdfreactor\webservice\client\ColorSpace;
 use com\realobjects\pdfreactor\webservice\client\Encryption;
 use com\realobjects\pdfreactor\webservice\client\HttpsMode;
-use com\realobjects\pdfreactor\webservice\client\JavaScriptMode;
 use com\realobjects\pdfreactor\webservice\client\LogLevel;
 use com\realobjects\pdfreactor\webservice\client\ViewerPreferences;
 use Pimcore\Bundle\WebToPrintBundle\Config;
@@ -33,7 +32,9 @@ class PdfReactor extends Processor
 {
     //Legacy constants, needed for compatibility reasons
     private const JAVA_SCRIPT_MODE_DISABLED = 'DISABLED';
+
     private const JAVA_SCRIPT_MODE_ENABLED = 'ENABLED';
+
     private const JAVA_SCRIPT_MODE_ENABLED_NO_LAYOUT = 'ENABLED_NO_LAYOUT';
 
     /**
@@ -92,7 +93,7 @@ class PdfReactor extends Processor
         $pdfreactor = new \com\realobjects\pdfreactor\webservice\client\PDFreactor($protocol . '://' . $web2PrintConfig['pdfreactorServer'] . ':' . $port . '/service/rest');
 
         //if (trim($web2PrintConfig['pdfreactorApiKey'])) {
-            $pdfreactor->apiKey = trim($web2PrintConfig['pdfreactorApiKey']);
+        $pdfreactor->apiKey = trim($web2PrintConfig['pdfreactorApiKey']);
         //}
 
         return $pdfreactor;
