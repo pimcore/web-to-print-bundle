@@ -31,6 +31,11 @@ use Pimcore\Logger;
 
 class PdfReactor extends Processor
 {
+    //Legacy constants, needed for compatibility reasons
+    private const JAVA_SCRIPT_MODE_DISABLED = 'DISABLED';
+    private const JAVA_SCRIPT_MODE_ENABLED = 'ENABLED';
+    private const JAVA_SCRIPT_MODE_ENABLED_NO_LAYOUT = 'ENABLED_NO_LAYOUT';
+
     /**
      * returns the default web2print config
      *
@@ -38,6 +43,13 @@ class PdfReactor extends Processor
      */
     protected function getConfig(object $config): array
     {
+
+        $javaScriptMode = $config->javaScriptMode ?? self::JAVA_SCRIPT_MODE_ENABLED;
+        $javaScriptSettings = [
+            'enabled' => $javaScriptMode === self::JAVA_SCRIPT_MODE_ENABLED || $javaScriptMode === self::JAVA_SCRIPT_MODE_ENABLED_NO_LAYOUT,
+            'noLayout' => $javaScriptMode === self::JAVA_SCRIPT_MODE_ENABLED_NO_LAYOUT,
+        ];
+
         $web2PrintConfig = Config::getWeb2PrintConfig();
         $reactorConfig = [
             'document' => '',
@@ -46,12 +58,16 @@ class PdfReactor extends Processor
             'title' => $config->title ?? '',
             'addLinks' => isset($config->links) && $config->links === true,
             'addBookmarks' => isset($config->bookmarks) && $config->bookmarks === true,
-            'javaScriptMode' => $config->javaScriptMode ?? JavaScriptMode::ENABLED,
-            'defaultColorSpace' => $config->colorspace ?? ColorSpace::CMYK,
+            'javaScriptSettings' => $javaScriptSettings,
+            'colorSpaceSettings' => [
+                'targetColorSpace' => $config->colorspace ?? ColorSpace::CMYK,
+            ],
             'encryption' => $config->encryption ?? Encryption::NONE,
             'addTags' => isset($config->tags) && $config->tags === true,
             'logLevel' => $config->loglevel ?? LogLevel::FATAL,
-            'enableDebugMode' => $web2PrintConfig['pdfreactorEnableDebugMode'] || (isset($config->enableDebugMode) && $config->enableDebugMode === true),
+            'debugSettings' => [
+                'all' => $web2PrintConfig['pdfreactorEnableDebugMode'] || (isset($config->enableDebugMode) && $config->enableDebugMode === true),
+            ],
             'addOverprint' => isset($config->addOverprint) && $config->addOverprint === true,
             'httpsMode' => $web2PrintConfig['pdfreactorEnableLenientHttpsMode'] ? HttpsMode::LENIENT : HttpsMode::STRICT,
         ];
@@ -75,9 +91,9 @@ class PdfReactor extends Processor
 
         $pdfreactor = new \com\realobjects\pdfreactor\webservice\client\PDFreactor($protocol . '://' . $web2PrintConfig['pdfreactorServer'] . ':' . $port . '/service/rest');
 
-        if (trim($web2PrintConfig['pdfreactorApiKey'])) {
+        //if (trim($web2PrintConfig['pdfreactorApiKey'])) {
             $pdfreactor->apiKey = trim($web2PrintConfig['pdfreactorApiKey']);
-        }
+        //}
 
         return $pdfreactor;
     }
@@ -179,8 +195,8 @@ class PdfReactor extends Processor
         $options[] = [
             'name' => 'javaScriptMode',
             'type' => 'select',
-            'values' => [JavaScriptMode::ENABLED, JavaScriptMode::DISABLED, JavaScriptMode::ENABLED_NO_LAYOUT],
-            'default' => JavaScriptMode::ENABLED,
+            'values' => [self::JAVA_SCRIPT_MODE_ENABLED, self::JAVA_SCRIPT_MODE_DISABLED, self::JAVA_SCRIPT_MODE_ENABLED_NO_LAYOUT],
+            'default' => self::JAVA_SCRIPT_MODE_ENABLED,
         ];
 
         $options[] = [

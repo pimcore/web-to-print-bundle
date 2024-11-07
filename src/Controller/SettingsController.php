@@ -95,7 +95,9 @@ class SettingsController extends UserAwareController
 
         if ($adapter instanceof PdfReactor) {
             $params['adapterConfig'] = [
-                'javaScriptMode' => 0,
+                'javaScriptSettings' => [
+                    'enabled' => false
+                ],
                 'addLinks' => true,
                 'appendLog' => true,
                 'enableDebugMode' => true,

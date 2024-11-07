@@ -54,7 +54,9 @@ class ProcessorTest extends ModelTestCase
 
         $pdfReactorConfig = [
             'adapterConfig' => [
-                'javaScriptMode' => 0,
+                'javaScriptSettings' => [
+                    'enabled' => false
+                ],
                 'addLinks' => true,
                 'appendLog' => true,
                 'enableDebugMode' => true,
