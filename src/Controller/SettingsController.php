@@ -100,7 +100,9 @@ class SettingsController extends UserAwareController
                 ],
                 'addLinks' => true,
                 'appendLog' => true,
-                'enableDebugMode' => true,
+                'debugSettings' => [
+                    'all' => true
+                ],
             ];
         } elseif ($adapter instanceof Gotenberg) {
             $params = Config::getWeb2PrintConfig();

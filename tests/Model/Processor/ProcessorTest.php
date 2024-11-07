@@ -59,7 +59,9 @@ class ProcessorTest extends ModelTestCase
                 ],
                 'addLinks' => true,
                 'appendLog' => true,
-                'enableDebugMode' => true,
+                'debugSettings' => [
+                    'all' => true
+                ],
             ],
         ];
         $this->checkProcessors('PdfReactor', $pdfReactorConfig);
