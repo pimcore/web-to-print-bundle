@@ -101,7 +101,7 @@ class SettingsController extends UserAwareController
                 'addLinks' => true,
                 'appendLog' => true,
                 'debugSettings' => [
-                    'all' => true
+                    'all' => true,
                 ],
             ];
         } elseif ($adapter instanceof Gotenberg) {

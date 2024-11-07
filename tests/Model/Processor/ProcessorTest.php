@@ -60,7 +60,7 @@ class ProcessorTest extends ModelTestCase
                 'addLinks' => true,
                 'appendLog' => true,
                 'debugSettings' => [
-                    'all' => true
+                    'all' => true,
                 ],
             ],
         ];
