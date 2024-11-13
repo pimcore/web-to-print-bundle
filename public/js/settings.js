@@ -274,7 +274,7 @@ pimcore.bundle.web2print.settings = Class.create({
                         autoEl:{
                             tag: 'a',
                             target: '_blank',
-                            href: "https://gotenberg.dev/docs/modules/chromium#routes",
+                            href: "https://gotenberg.dev/docs/routes#page-properties-chromium",
                         }
                     },{
                         xtype: "displayfield",
