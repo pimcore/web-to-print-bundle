@@ -13,7 +13,7 @@ $finder = PhpCsFixer\Finder::create()
     ])
 
     ->notPath([
-        __DIR__ . 'src/Processor/Api/PDFreactor.class.php'
+        'src/Processor/Api/PDFreactor.class.php'
     ])
 ;
 
