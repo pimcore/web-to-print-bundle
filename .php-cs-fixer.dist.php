@@ -10,7 +10,6 @@ $finder = PhpCsFixer\Finder::create()
     ->exclude([
         __DIR__ . '/tests/_output',
         __DIR__ . '/tests/Support/_generated',
-        //'Processor/Api/PDFreactor.class.php'
     ])
 
     ->notPath([
