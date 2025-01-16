@@ -12,10 +12,10 @@
   },
   "prefer-stable": true,
   "require": {
-    "php": "~8.1.0 || ~8.2.0 || ~8.3.0",
+    "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0",
     "doctrine/dbal": "^3.6",
-    "pimcore/admin-ui-classic-bundle": "^1.1",
-    "pimcore/pimcore": "^11.2"
+    "pimcore/admin-ui-classic-bundle": "^1.1 || 2.x-dev",
+    "pimcore/pimcore": "^11.2 || 12.x-dev"
   },
   "require-dev": {
     "phpstan/phpstan": "^1.10.5",

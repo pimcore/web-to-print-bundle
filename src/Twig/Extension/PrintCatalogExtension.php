@@ -56,7 +56,7 @@ class PrintCatalogExtension extends AbstractExtension
         ];
     }
 
-    public function getSpecValue(\stdClass $outputElement, string $thumbnailName = null): string
+    public function getSpecValue(\stdClass $outputElement, ?string $thumbnailName = null): string
     {
         if ($outputElement->value instanceof Image) {
             return $this->printImage($outputElement->value, $thumbnailName);
