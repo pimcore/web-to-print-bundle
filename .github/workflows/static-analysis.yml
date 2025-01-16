@@ -27,7 +27,7 @@ jobs:
            matrix:
                include:
                    - { php-version: "8.1", database: "mariadb:10.11", dependencies: "lowest", phpstan_args: "", experimental: false }
-                   - { php-version: "8.3", database: "mariadb:10.11", dependencies: "highest", phpstan_args: "", experimental: false }
+                   - { php-version: "8.4", database: "mariadb:10.11", dependencies: "highest", phpstan_args: "", experimental: false }
                    - { php-version: "8.4", database: "mariadb:10.11", dependencies: "highest", pimcore_version: "12.x-dev", phpstan_args: "", experimental: true }
        steps:
            - name: "Checkout code"

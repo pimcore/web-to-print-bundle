@@ -39,7 +39,7 @@ jobs:
             matrix:
                 include:
                     - { php-version: 8.1, database: "mariadb:10.3", dependencies: lowest, experimental: false }
-                    - { php-version: 8.3, database: "mariadb:10.11", dependencies: highest, experimental: false }
+                    - { php-version: 8.4, database: "mariadb:10.11", dependencies: highest, experimental: false }
                     - { php-version: 8.4, database: "mariadb:10.11", dependencies: highest, pimcore_version: "12.x-dev", experimental: true }
 
         services:
@@ -99,7 +99,6 @@ jobs:
               run: |
                   if [ ! -z "$PIMCORE_VERSION" ]; then
                         composer require --no-update pimcore/pimcore:"${PIMCORE_VERSION}"
-                        composer require --no-update pimcore/admin-ui-classic-bundle:1.x-dev
                   fi    
 
             - name: "Install dependencies with Composer"
