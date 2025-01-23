@@ -132,7 +132,7 @@ class Gotenberg extends Processor
         ];
 
         foreach ($options as $option) {
-            if (isset($params[$option]) && $params[$option] != false) {
+            if (isset($params[$option]) && $params[$option] != false && method_exists($chromium, $option)) {
                 $chromium->$option();
             }
         }
