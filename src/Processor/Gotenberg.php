@@ -128,13 +128,18 @@ class Gotenberg extends Processor
 
         $options = [
             'printBackground', 'landscape', 'preferCssPageSize', 'omitBackground', 'emulatePrintMediaType',
-            'emulateScreenMediaType', 'generateDocumentOutline',
+            'emulateScreenMediaType',
         ];
 
         foreach ($options as $option) {
-            if (isset($params[$option]) && $params[$option] != false && method_exists($chromium, $option)) {
+            if (isset($params[$option]) && $params[$option] != false) {
                 $chromium->$option();
             }
+        }
+
+        // generateDocumentOutline is only available for gotenberg >= 8.14.0 and gotenberg-php >= v2.10.0
+        if (isset($params['generateDocumentOutline']) && $params['generateDocumentOutline'] != false) {
+            $chromium->generateDocumentOutline();
         }
 
         $chromium->margins(
