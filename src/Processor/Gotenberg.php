@@ -138,7 +138,8 @@ class Gotenberg extends Processor
         }
 
         // generateDocumentOutline is only available for gotenberg >= 8.14.0 and gotenberg-php >= v2.10.0
-        if (isset($params['generateDocumentOutline']) && $params['generateDocumentOutline']) {
+        if (isset($params['generateDocumentOutline']) && $params['generateDocumentOutline']
+            && method_exists($chromium, 'generateDocumentOutline')) {
             $chromium->generateDocumentOutline();
         }
 
