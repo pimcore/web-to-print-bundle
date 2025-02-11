@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /**
@@ -21,7 +22,7 @@ use function file_exists;
 use Gotenberg\Gotenberg as GotenbergAPI;
 use Gotenberg\Stream;
 use function json_decode;
-use function key_exists;
+use function array_key_exists;
 use Pimcore\Bundle\WebToPrintBundle\Config;
 use Pimcore\Bundle\WebToPrintBundle\Event\DocumentEvents;
 use Pimcore\Bundle\WebToPrintBundle\Event\Model\PrintConfigEvent;
@@ -89,10 +90,14 @@ class Gotenberg extends Processor
 
         if ($gotenbergSettings) {
             foreach (['header', 'footer'] as $item) {
-                if (key_exists($item, $gotenbergSettings) && $gotenbergSettings[$item] &&
-                    file_exists($gotenbergSettings[$item])) {
+                if (
+                    array_key_exists($item, $gotenbergSettings) &&
+                    $gotenbergSettings[$item] &&
+                    file_exists($gotenbergSettings[$item])
+                ) {
                     $gotenbergSettings[$item . 'Template'] = $gotenbergSettings[$item];
                 }
+
                 unset($gotenbergSettings[$item]);
             }
 
@@ -110,7 +115,7 @@ class Gotenberg extends Processor
 
         ['html' => $html, 'params' => $params] = $event->getArguments();
 
-        $tempFileName = uniqid('web2print_');
+        $tempFileName = uniqid('web2print_', false);
 
         $chromium = GotenbergAPI::chromium(\Pimcore\Config::getSystemConfiguration('gotenberg')['base_url']);
         // To support gotenberg-php v2 and so on
@@ -138,8 +143,11 @@ class Gotenberg extends Processor
         }
 
         // generateDocumentOutline is only available for gotenberg >= 8.14.0 and gotenberg-php >= v2.10.0
-        if (isset($params['generateDocumentOutline']) && $params['generateDocumentOutline']
-            && method_exists($chromium, 'generateDocumentOutline')) {
+        if (
+            isset($params['generateDocumentOutline']) &&
+            $params['generateDocumentOutline']
+            && method_exists($chromium, 'generateDocumentOutline')
+        ) {
             $chromium->generateDocumentOutline();
         }
 
@@ -177,6 +185,12 @@ class Gotenberg extends Processor
             $chromium->metadata($params['metadata']);
         }
 
+        if (isset($params['assets'])) {
+            foreach ($params['assets'] as $asset) {
+                $chromium->assets($asset);
+            }
+        }
+
         $request = $chromium->outputFilename($tempFileName)->html(Stream::string('processor.html', $html));
 
         if ($returnFilePath) {
@@ -184,6 +198,7 @@ class Gotenberg extends Processor
 
             return PIMCORE_SYSTEM_TEMP_DIRECTORY . DIRECTORY_SEPARATOR . $filename;
         }
+        
         $response = GotenbergAPI::send($request);
 
         return $response->getBody()->getContents();
