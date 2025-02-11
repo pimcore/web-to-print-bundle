@@ -17,12 +17,12 @@ declare(strict_types=1);
 
 namespace Pimcore\Bundle\WebToPrintBundle\Processor;
 
+use function array_key_exists;
 use function array_merge;
 use function file_exists;
 use Gotenberg\Gotenberg as GotenbergAPI;
 use Gotenberg\Stream;
 use function json_decode;
-use function array_key_exists;
 use Pimcore\Bundle\WebToPrintBundle\Config;
 use Pimcore\Bundle\WebToPrintBundle\Event\DocumentEvents;
 use Pimcore\Bundle\WebToPrintBundle\Event\Model\PrintConfigEvent;
@@ -198,7 +198,7 @@ class Gotenberg extends Processor
 
             return PIMCORE_SYSTEM_TEMP_DIRECTORY . DIRECTORY_SEPARATOR . $filename;
         }
-        
+
         $response = GotenbergAPI::send($request);
 
         return $response->getBody()->getContents();
