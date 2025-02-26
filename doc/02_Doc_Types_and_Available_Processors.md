@@ -2,10 +2,10 @@
 ## Document Types
 This bundle introduces 2 new document types:
 
-| Type           | Description                                                                                                                                                 | 
-|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [PrintPage](./02_Print_Documents.md#printpage)      | Like pages, but specialized for print (PDF preview, rendering options, ...)                                                                                 | 
-| [PrintContainer](./02_Print_Documents.md#printcontainer) | Organizing print pages in chapters and render them all together.                                                                                            | 
+| Type                                                     | Description                                                                                                                                                 | 
+|----------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [PrintPage](./03_Print_Documents.md#printpage)           | Like pages, but specialized for print (PDF preview, rendering options, ...)                                                                                 | 
+| [PrintContainer](./03_Print_Documents.md#printcontainer) | Organizing print pages in chapters and render them all together.                                                                                            | 
 
 ## Available PDF Processors
 
