@@ -11,7 +11,6 @@ This bundle introduces 2 new document types:
 
 | Name           | Description                                                                                                                                                | 
 |----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Chromium](https://www.chromium.org/Home/)      | Convert to PDF by installing the Chromium binary or by using a dockerized chromium (via websocket)                                                         | 
 | [Gotenberg](https://gotenberg.dev/) | A Docker service with Chromium and LibreOffice support                                                                                                     | 
 | [PDF Reactor](https://www.pdfreactor.com/) | A REST solution for rendering complex catalogs, please visit the official website for further information. Currently Pimcore supports PDFreactor 10, 11, 12 | 
 

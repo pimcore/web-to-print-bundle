@@ -1,7 +1,7 @@
 # Installation
 
 ## Installing processor dependencies
-If you want to use Gotenberg or Chromium as processor, you need to install additional dependencies. For more information and installation informations have a look at [Document Types and Available PDF Processors](01_Doc_Types_and_Available_Processors.md#available-pdf-processors)
+If you want to use Gotenberg as processor, you need to install additional dependencies. For more information and installation informations have a look at [Document Types and Available PDF Processors](01_Doc_Types_and_Available_Processors.md#available-pdf-processors)
 
 
 ## Installation Process

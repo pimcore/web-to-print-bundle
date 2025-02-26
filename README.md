@@ -11,7 +11,7 @@ Adds the ability to create web-to-print documents in Pimcore and to convert them
 - Add web2print support for generating PDFs to Pimcore.
 - Add new Pimcore-specific Document types to create print documents with Pimcore Documents (and all related concepts and features).
 - Allow creating single pages and whole catalogs with chapters, subchapters and table of contents.
-- Integrate different adapters to render documents to PDFs: Chromium, Gotenberg, PDF reactor.
+- Integrate different adapters to render documents to PDFs: Gotenberg, PDF reactor.
 
 ## Documentation Overview
 * [Installation](./doc/00_Installation.md)
