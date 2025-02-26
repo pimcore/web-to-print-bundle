@@ -25,6 +25,9 @@ use Pimcore\Bundle\WebToPrintBundle\Processor;
 use Pimcore\Image\Chromium as ChromiumLib;
 use Pimcore\Logger;
 
+/**
+ * @deprecated will be removed in the next major release
+ */
 class Chromium extends Processor
 {
     /**

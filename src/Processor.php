@@ -43,6 +43,8 @@ abstract class Processor
         if ($config['generalTool'] == 'pdfreactor') {
             return new PdfReactor();
         } elseif ($config['generalTool'] == 'chromium') {
+            trigger_deprecation('pimcore/web-to-print-bundle', '1.5', 'The "chromium" processor is deprecated and will be removed in the next major release. Use "gotenberg" or "pdfreactor" instead.');
+
             return new Chromium();
         } elseif ($config['generalTool'] == 'gotenberg') {
             return new Gotenberg();
