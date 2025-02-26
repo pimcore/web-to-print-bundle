@@ -7,7 +7,7 @@ If you want to use Gotenberg or Chromium as processor, you need to install addit
 ## Installation Process
 After installing the bundle and the required dependencies of the processor you wish to use, you need to configure the settings under *Settings >  Web-to-Print*. 
 
-If the *Save* button on bottom right is disabled, your config [location configuration](https://docs.pimcore.com/platform/next/Pimcore/Deployment/Configuration_Environments/) does not allow changing the config in Pimcore Admin UI. You can change this by editing `<Pimcore root>/config/config.yaml`:
+If the *Save* button on bottom right is disabled, your [config location configuration](https://docs.pimcore.com/platform/next/Pimcore/Deployment/Configuration_Environments/) does not allow changing the config in Pimcore Admin UI. You can change this by editing `<Pimcore root>/config/config.yaml`:
 ```yaml
 pimcore_web_to_print:
     config_location:
