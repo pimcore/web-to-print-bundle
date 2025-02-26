@@ -15,8 +15,8 @@ Adds the ability to create web-to-print documents in Pimcore and to convert them
 
 ## Documentation Overview
 * [Installation](./doc/01_Installation/README.md)
-* [Document Types and Available PDF Processors](./doc/01_Doc_Types_and_Available_Processors.md)
-* [Print Documents](./doc/02_Print_Documents.md)
+* [Document Types and Available PDF Processors](./doc/02_Doc_Types_and_Available_Processors.md)
+* [Print Documents](./doc/03_Print_Documents.md)
 * [Extending PDF Creation Config for PDF/X Conformance](./doc/90_Web2Print_Extending_Config_for_PDFX_conformance.md)
 
 ## Contributing and Development
