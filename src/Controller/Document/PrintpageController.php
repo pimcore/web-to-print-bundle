@@ -16,13 +16,12 @@ declare(strict_types=1);
 
 namespace Pimcore\Bundle\WebToPrintBundle\Controller\Document;
 
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 /**
- * @Route("/printpage", name="pimcore_bundle_web2print_document_printpage_")
- *
  * @internal
  */
+#[Route('/printpage', name: 'pimcore_bundle_web2print_document_printpage_')]
 class PrintpageController extends PrintpageControllerBase
 {
 }
