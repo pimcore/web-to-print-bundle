@@ -33,12 +33,6 @@ class ProcessorTest extends ModelTestCase
         $this->checkProcessors('Gotenberg', ['landscape' => true]);
     }
 
-    public function testChromium()
-    {
-        $this->checkProcessors('Chromium', ['landscape' => false]);
-        $this->checkProcessors('Chromium', ['landscape' => true]);
-    }
-
     public function testPdfReactor()
     {
         $config = Config::getWeb2PrintConfig();

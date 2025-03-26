@@ -21,7 +21,6 @@ use Pimcore\Bundle\WebToPrintBundle\Exception\CancelException;
 use Pimcore\Bundle\WebToPrintBundle\Exception\NotPreparedException;
 use Pimcore\Bundle\WebToPrintBundle\Messenger\GenerateWeb2PrintPdfMessage;
 use Pimcore\Bundle\WebToPrintBundle\Model\Document\PrintAbstract;
-use Pimcore\Bundle\WebToPrintBundle\Processor\Chromium;
 use Pimcore\Bundle\WebToPrintBundle\Processor\Gotenberg;
 use Pimcore\Bundle\WebToPrintBundle\Processor\PdfReactor;
 use Pimcore\Event\Model\DocumentEvent;
@@ -36,16 +35,12 @@ abstract class Processor
 {
     private static ?LockInterface $lock = null;
 
-    public static function getInstance(): PdfReactor|Gotenberg|Chromium|Processor
+    public static function getInstance(): PdfReactor|Gotenberg|Processor
     {
         $config = Config::getWeb2PrintConfig();
 
         if ($config['generalTool'] == 'pdfreactor') {
             return new PdfReactor();
-        } elseif ($config['generalTool'] == 'chromium') {
-            trigger_deprecation('pimcore/web-to-print-bundle', '1.5', 'The "chromium" processor is deprecated and will be removed in the next major release. Use "gotenberg" or "pdfreactor" instead.');
-
-            return new Chromium();
         } elseif ($config['generalTool'] == 'gotenberg') {
             return new Gotenberg();
         } else {

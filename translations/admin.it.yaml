@@ -59,23 +59,5 @@ web2print_hostname: Nome Host
 web2print_protocol: Protocollo
 web2print_port: Porta
 web2print_apiKey: Chiave API
-web2print_chromium_requirements: Requisiti
-web2print_chromium_requirements_documentation: Si prega di assicurarsi che chrome-php/chrome
-  sia installato tramite composer
-web2print_chromium_settings: Impostazioni Chromium
-web2print_chromium_documentation: Documentazione Opzioni
-web2print_chromium_options_documentation: Assicurarsi che la configurazione seguente
-  corrisponda all'opzione disponibile in Chrome DevTools Documentation, qualsiasi
-  altro valore potrebbe interrompere la generazione di pdf.
-web2print_chromium_documentation_additions: Opzioni aggiuntive
-web2print_chromium_documentation_additions_text: "Esistono due opzioni aggiuntive:
-  \"header\" e \"footer\". Queste opzioni necessitano di un URL che restituisce il
-  modello dell'intestazione o del pi\xE8 di pagina."
-web2print_chromium_documentation_docker: |-
-  Note
-   per Chromium in Docker
-web2print_chromium_documentation_docker_text: Quando si utilizza un Chromium Dockerizzato
-  tramite WebSocket, il campo seguente deve essere impostato sul servizio web server.
-  Per es. `http://nginx:80`
 web2print_hostURL: Url Host
 ...
