@@ -3,9 +3,39 @@ pimcore.registerNS("pimcore.bundle.web2print.startup");
 pimcore.bundle.web2print.startup = Class.create({
 
     initialize: function () {
+        if (pimcore.events.onPerspectiveEditorLoadPermissions) {
+            document.addEventListener(pimcore.events.onPerspectiveEditorLoadPermissions, this.addMenuPermissions.bind(this));
+            document.addEventListener(pimcore.events.onPerspectiveEditorLoadPermissions, this.addContextMenuPermissions.bind(this));
+        }
+
         document.addEventListener(pimcore.events.preMenuBuild, this.preMenuBuild.bind(this));
         document.addEventListener(pimcore.events.prepareDocumentTreeContextMenu, this.onPrepareDocumentTreeContextMenu.bind(this));
     },
+
+    addMenuPermissions: function (e) {
+        const context = e.detail.context;
+        const menu = e.detail.menu;
+        const permissions = e.detail.permissions;
+
+        if(context === 'toolbar' & menu === 'settings' &&
+           permissions[context][menu].indexOf('items.web2print') === -1) {
+            permissions[context][menu].push('items.web2print');
+        }
+    },
+
+    addContextMenuPermissions: function (e) {
+        const context = e.detail.context;
+        const menu = e.detail.menu;
+        const permissions = e.detail.permissions;
+
+        if (context === 'customViewContextMenu' && menu === 'document') {
+            ['items.addPrintPage', 'items.addBlankPrintPage'].forEach((permission) => {
+                if (permissions[context][menu].indexOf(permission) === -1) {
+                    permissions[context][menu].push(permission);
+                }
+            });
+        }
+    }, 
 
     preMenuBuild: function (e) {
         let menu = e.detail.menu;
