@@ -28,7 +28,7 @@ use Pimcore\Model\Schedule\Task;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 /**
  * @internal
@@ -36,10 +36,9 @@ use Symfony\Component\Routing\Annotation\Route;
 abstract class PrintpageControllerBase extends DocumentControllerBase
 {
     /**
-     * @Route("/get-data-by-id", name="getdatabyid", methods={"GET"})
-     *
      * @throws Exception
      */
+    #[Route('/get-data-by-id', name: 'getdatabyid', methods: ['GET'])]
     public function getDataByIdAction(Request $request): JsonResponse
     {
         $page = PrintAbstract::getById($request->query->getInt('id'));
@@ -84,10 +83,9 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
     }
 
     /**
-     * @Route("/save", name="save", methods={"PUT", "POST"})
-     *
      * @throws ValidationException
      */
+    #[Route('/save', name: 'save', methods: ['PUT', 'POST'])]
     public function saveAction(Request $request): JsonResponse
     {
         $page = PrintAbstract::getById($request->request->getInt('id'));
@@ -134,11 +132,7 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
         }
     }
 
-    /**
-     * @Route("/add", name="add", methods={"POST"})
-     *
-     *
-     */
+    #[Route('/add', name: 'add', methods: ['POST'])]
     public function addAction(Request $request): JsonResponse
     {
         $success = false;
@@ -234,10 +228,9 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
     }
 
     /**
-     * @Route("/active-generate-process", name="activegenerateprocess", methods={"POST"})
-     *
      * @throws Exception
      */
+    #[Route('/active-generate-process', name: 'activegenerateprocess', methods: ['POST'])]
     public function activeGenerateProcessAction(Request $request): JsonResponse
     {
         $document = PrintAbstract::getById($request->request->getInt('id'));
@@ -268,10 +261,9 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
     }
 
     /**
-     * @Route("/pdf-download", name="pdfdownload", methods={"GET"})
-     *
      * @throws Exception
      */
+    #[Route('/pdf-download', name: 'pdfdownload', methods: ['GET'])]
     public function pdfDownloadAction(Request $request): BinaryFileResponse
     {
         $document = PrintAbstract::getById($request->query->getInt('id'));
@@ -294,10 +286,9 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
     }
 
     /**
-     * @Route("/start-pdf-generation", name="startpdfgeneration", methods={"POST"})
-     *
      * @throws Exception
      */
+    #[Route('/start-pdf-generation', name: 'startpdfgeneration', methods: ['POST'])]
     public function startPdfGenerationAction(Request $request, \Pimcore\Config $config): JsonResponse
     {
         $allParams = json_decode($request->getContent(), true);
@@ -326,11 +317,7 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
         return $this->adminJson(['success' => $result]);
     }
 
-    /**
-     * @Route("/check-pdf-dirty", name="checkpdfdirty", methods={"GET"})
-     *
-     *
-     */
+    #[Route('/check-pdf-dirty', name: 'checkpdfdirty', methods: ['GET'])]
     public function checkPdfDirtyAction(Request $request): JsonResponse
     {
         $printDocument = PrintAbstract::getById($request->query->getInt('id'));
@@ -343,11 +330,7 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
         return $this->adminJson(['pdfDirty' => $dirty]);
     }
 
-    /**
-     * @Route("/get-processing-options", name="getprocessingoptions", methods={"GET"})
-     *
-     *
-     */
+    #[Route('/get-processing-options', name: 'getprocessingoptions', methods: ['GET'])]
     public function getProcessingOptionsAction(Request $request): JsonResponse
     {
         $options = Processor::getInstance()->getProcessingOptions();
@@ -393,10 +376,9 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
     }
 
     /**
-     * @Route("/cancel-generation", name="cancelgeneration", methods={"DELETE"})
-     *
      * @throws Exception
      */
+    #[Route('/cancel-generation', name: 'cancelgeneration', methods: ['DELETE'])]
     public function cancelGenerationAction(Request $request): JsonResponse
     {
         Processor::getInstance()->cancelGeneration($request->request->getInt('id'));

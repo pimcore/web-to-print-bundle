@@ -25,22 +25,17 @@ use Pimcore\Controller\UserAwareController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 /**
- * @Route("/settings")
- *
  * @internal
  */
+#[Route('/settings')]
 class SettingsController extends UserAwareController
 {
     use JsonHelperTrait;
 
-    /**
-     * @Route("/get-web2print", name="pimcore_bundle_web2print_settings_getweb2print", methods={"GET"})
-     *
-     *
-     */
+    #[Route('/get-web2print', name: 'pimcore_bundle_web2print_settings_getweb2print', methods: ['GET'])]
     public function getWeb2printAction(Request $request): JsonResponse
     {
         $this->checkPermission('web2print_settings');
@@ -54,11 +49,7 @@ class SettingsController extends UserAwareController
         return $this->jsonResponse($response);
     }
 
-    /**
-     * @Route("/set-web2print", name="pimcore_bundle_web2print_settings_setweb2print", methods={"PUT"})
-     *
-     *
-     */
+    #[Route('/set-web2print', name: 'pimcore_bundle_web2print_settings_setweb2print', methods: ['PUT'])]
     public function setWeb2printAction(Request $request): JsonResponse
     {
         $this->checkPermission('web2print_settings');
@@ -77,11 +68,7 @@ class SettingsController extends UserAwareController
         return $this->jsonResponse(['success' => true]);
     }
 
-    /**
-     * @Route("/test-web2print", name="pimcore_bundle_web2print_settings_testweb2print", methods={"GET"})
-     *
-     *
-     */
+    #[Route('/test-web2print', name: 'pimcore_bundle_web2print_settings_testweb2print', methods: ['GET'])]
     public function testWeb2printAction(Request $request): Response
     {
         $this->checkPermission('web2print_settings');
