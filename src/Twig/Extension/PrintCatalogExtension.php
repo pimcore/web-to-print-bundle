@@ -98,7 +98,7 @@ class PrintCatalogExtension extends AbstractExtension
     {
         $image = $hotspotimage->getImage();
         if ($image) {
-            return "<img src='{$hotspotimage->getThumbnail($thumbnailName)}' alt='image' />";
+            return "<img src='{$hotspotimage->getThumbnail($thumbnailName, false)}' alt='image' />";
         }
 
         return '';
