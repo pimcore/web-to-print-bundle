@@ -72,10 +72,10 @@ class ProcessorTest extends ModelTestCase
         $tempMetadata = stream_get_meta_data($file);
         $tempPath = $tempMetadata['uri'];
         file_put_contents($tempPath, $pdfContent);
-        var_dump($tempMetadata);
+        error_log(var_export($tempMetadata, true));
         $gs = new Ghostscript();
         $pdfText = $gs->getText(null, null, $tempPath);
-        var_dump($tempPath);
+        error_log(var_export(($tempPath, true));
         $this->assertStringContainsString('Pellentesque habitant morbi tristiqu', $pdfText, 'Check if pdf contains text from html template');
 
         $pdfInfo = $this->getPDFInfo($tempPath);
