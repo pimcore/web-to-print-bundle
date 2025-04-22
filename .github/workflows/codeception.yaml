@@ -87,9 +87,8 @@ jobs:
             DEPENDENCIES: ${{ matrix.matrix.dependencies }}
             EXPERIMENTAL: ${{ matrix.matrix.experimental }}
             PIMCORE_VERSION: ${{ matrix.matrix.pimcore_version }}
-            PIMCORE_TEST_REDIS_DSN: "redis://127.0.0.1:63379"
-            PIMCORE_TEST_GOTENBERG_DNS: 'http://127.0.0.1:31234'
-            PIMCORE_PROJECT_ROOT: ${{ github.workspace }}
+            GOTENBERG_DNS: ${{matrix.matrix.gotenberg_dns}}
+            REDIS_DSN: ${{matrix.matrix.redis_dns}}
         secrets:
             SSH_PRIVATE_KEY_PIMCORE_DEPLOYMENTS_USER: ${{ secrets.SSH_PRIVATE_KEY_PIMCORE_DEPLOYMENTS_USER }}
             COMPOSER_PIMCORE_REPO_PACKAGIST_TOKEN: ${{ secrets.COMPOSER_PIMCORE_REPO_PACKAGIST_TOKEN }}
