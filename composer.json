@@ -1,6 +1,6 @@
 {
   "name": "pimcore/web-to-print-bundle",
-  "license": "Pimcore Open Core License (POCL)",
+  "license": "proprietary",
   "type": "pimcore-bundle",
   "description": "Pimcore WebToPrint Bundle",
   "config": {
