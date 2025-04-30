@@ -21,14 +21,14 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 
 /**
-* This source file is available under the terms of the
-* Pimcore Open Core License (POCL)
-* Full copyright and license information is available in
-* LICENSE.md which is distributed with this source code.
-*
-*  @copyright  Copyright (c) Pimcore GmbH (http://www.pimcore.com)
-*  @license    Pimcore Open Core License (POCL)
-*/
+ * This source file is available under the terms of the
+ * Pimcore Open Core License (POCL)
+ * Full copyright and license information is available in
+ * LICENSE.md which is distributed with this source code.
+ *
+ *  @copyright  Copyright (c) Pimcore GmbH (http://www.pimcore.com)
+ *  @license    Pimcore Open Core License (POCL)
+ */
 final class PimcoreWebToPrintExtension extends ConfigurableExtension implements PrependExtensionInterface
 {
     public function loadInternal(array $config, ContainerBuilder $container): void
