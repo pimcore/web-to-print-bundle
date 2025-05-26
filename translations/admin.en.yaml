@@ -1,5 +1,8 @@
 add_printpage: Add PrintPage
 add_printcontainer: Add PrintContainer
+plugin_pimcore_perspectiveeditor_document_items_addPrintPage: "Add PrintPage"
+plugin_pimcore_perspectiveeditor_document_items_addBlankPrintPage: "Add PrintPage > Blank"
+plugin_pimcore_perspectiveeditor_menu_settings_items_web2print: "Web-to-Print Settings"
 web2print_settings: Web-to-Print Settings
 web2print_preview_pdf: Generate & Preview PDF
 web2print_cancel_pdf_creation: Cancel PDF Creation
