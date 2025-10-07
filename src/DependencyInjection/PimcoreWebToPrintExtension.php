@@ -45,5 +45,14 @@ final class PimcoreWebToPrintExtension extends ConfigurableExtension implements 
     public function prepend(ContainerBuilder $container): void
     {
         LocationAwareConfigRepository::loadSymfonyConfigFiles($container, 'pimcore_web_to_print', 'web_to_print');
+        
+        $loader = new YamlFileLoader(
+            $container,
+            new FileLocator(__DIR__ . '/../../config')
+        );
+
+        if ($container->hasExtension('pimcore_studio_ui')) {
+            $loader->load('studio_ui.yaml');
+        }
     }
 }

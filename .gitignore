@@ -41,3 +41,6 @@ nbproject
 /.htaccess
 /auth.json
 /config.json
+
+# Studio related files
+/assets/studio/node_modules
