@@ -2,13 +2,19 @@ import { defineConfig } from '@rsbuild/core'
 import { pluginReact } from '@rsbuild/plugin-react'
 import { pluginModuleFederation } from '@module-federation/rsbuild-plugin';
 import { pluginGenerateEntrypoints } from '@pimcore/studio-ui-bundle/rsbuild/plugins';
-import path from 'Node:path'
+import path from 'node:path'
 import fs from 'node:fs';
 import { v4 } from 'uuid';
 import packages from './package.json'
 
 const buildId = v4();
 const buildPath = path.resolve(__dirname, '..', '..', 'public', 'studio', 'build', buildId);
+
+if (fs.existsSync( path.resolve(__dirname, '..', '..', 'public', 'studio', 'build'))) {
+  for (const file of fs.readdirSync(path.resolve(__dirname, '..', '..', 'public', 'studio', 'build'))) {
+    fs.rmSync(path.resolve(__dirname, '..', '..', 'public', 'studio', 'build', file), { recursive: true });
+  }
+}
 
 if (!fs.existsSync(buildPath)) {
   fs.mkdirSync(buildPath, { recursive: true });
