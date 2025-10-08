@@ -2,21 +2,13 @@ import { defineConfig } from '@rsbuild/core'
 import { pluginReact } from '@rsbuild/plugin-react'
 import { pluginModuleFederation } from '@module-federation/rsbuild-plugin';
 import { pluginGenerateEntrypoints } from '@pimcore/studio-ui-bundle/rsbuild/plugins';
-import path from 'path'
-import fs from 'fs';
+import path from 'Node:path'
+import fs from 'node:fs';
 import { v4 } from 'uuid';
 import packages from './package.json'
 
 const buildId = v4();
 const buildPath = path.resolve(__dirname, '..', '..', 'public', 'studio', 'build', buildId);
-
-if (fs.existsSync( path.resolve(__dirname, '..', '..', 'public', 'studio', 'build'))) {
-  fs.readdirSync(path.resolve(__dirname, '..', '..', 'public', 'studio', 'build')).forEach((file) => {
-    if (file !== 'studio-npm-package.tgz') {
-      fs.rmSync(path.resolve(__dirname, '..', '..', 'public', 'studio', 'build', file), { recursive: true });
-    }
-  })
-}
 
 if (!fs.existsSync(buildPath)) {
   fs.mkdirSync(buildPath, { recursive: true });
@@ -36,7 +28,7 @@ export default defineConfig({
     port: 3032,
   },
   dev: {
-    ...(!isDevServer ? {assetPrefix: '/bundles/pimcorewebtoprint/studio/build/' + buildId} : {}),
+    ...(isDevServer ? {} : {assetPrefix: '/bundles/pimcorewebtoprint/studio/build/' + buildId}),
     client: {
       host: 'localhost',
       port: 3032,
