@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Pimcore\Bundle\WebToPrintBundle\Controller\Document;
 
+use Pimcore\Helper\ParameterBagHelper;
 use Exception;
 use Pimcore\Bundle\AdminBundle\Controller\Admin\Document\DocumentControllerBase;
 use Pimcore\Bundle\WebToPrintBundle\Config;
@@ -38,7 +39,7 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
     #[Route('/get-data-by-id', name: 'getdatabyid', methods: ['GET'])]
     public function getDataByIdAction(Request $request): JsonResponse
     {
-        $page = PrintAbstract::getById($request->query->getInt('id'));
+        $page = PrintAbstract::getById(ParameterBagHelper::getInt($request->query, 'id'));
 
         if (!$page) {
             throw $this->createNotFoundException('Document not found');
@@ -85,7 +86,7 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
     #[Route('/save', name: 'save', methods: ['PUT', 'POST'])]
     public function saveAction(Request $request): JsonResponse
     {
-        $page = PrintAbstract::getById($request->request->getInt('id'));
+        $page = PrintAbstract::getById(ParameterBagHelper::getInt($request->request, 'id'));
         if (!$page) {
             throw $this->createNotFoundException('Document not found');
         }
@@ -136,7 +137,7 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
         $errorMessage = '';
 
         // check for permission
-        $parentDocument = Document::getById($request->request->getInt('parentId'));
+        $parentDocument = Document::getById(ParameterBagHelper::getInt($request->request, 'parentId'));
         $document = null;
         if ($parentDocument->isAllowed('create')) {
             $intendedPath = $parentDocument->getRealFullPath() . '/' . $request->request->getString('key');
@@ -165,7 +166,7 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
                 }
 
                 if ($request->request->has('inheritanceSource')) {
-                    $createValues['contentMainDocumentId'] = $request->request->getInt('inheritanceSource');
+                    $createValues['contentMainDocumentId'] = ParameterBagHelper::getInt($request->request, 'inheritanceSource');
                 }
 
                 $className = \Pimcore::getContainer()->get('pimcore.class.resolver.document')->resolve($request->request->getString('type'));
@@ -191,7 +192,7 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
         }
 
         if ($success && $document instanceof Document) {
-            if ($translationsBaseDocumentId = $request->request->getInt('translationsBaseDocument')) {
+            if ($translationsBaseDocumentId = ParameterBagHelper::getInt($request->request, 'translationsBaseDocument')) {
                 $translationsBaseDocument = Document::getById($translationsBaseDocumentId);
 
                 $properties = $translationsBaseDocument->getProperties();
@@ -230,10 +231,10 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
     #[Route('/active-generate-process', name: 'activegenerateprocess', methods: ['POST'])]
     public function activeGenerateProcessAction(Request $request): JsonResponse
     {
-        $document = PrintAbstract::getById($request->request->getInt('id'));
+        $document = PrintAbstract::getById(ParameterBagHelper::getInt($request->request, 'id'));
 
         if (!$document) {
-            throw $this->createNotFoundException('Document with id ' . $request->request->getInt('id') . ' not found.');
+            throw $this->createNotFoundException('Document with id ' . ParameterBagHelper::getInt($request->request, 'id') . ' not found.');
         }
 
         $date = $document->getLastGeneratedDate();
@@ -263,10 +264,10 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
     #[Route('/pdf-download', name: 'pdfdownload', methods: ['GET'])]
     public function pdfDownloadAction(Request $request): BinaryFileResponse
     {
-        $document = PrintAbstract::getById($request->query->getInt('id'));
+        $document = PrintAbstract::getById(ParameterBagHelper::getInt($request->query, 'id'));
 
         if (!$document) {
-            throw $this->createNotFoundException('Document with id ' . $request->query->getInt('id') . ' not found.');
+            throw $this->createNotFoundException('Document with id ' . ParameterBagHelper::getInt($request->query, 'id') . ' not found.');
         }
 
         if ($this->checkFileExists($document->getPdfFileName())) {
@@ -317,7 +318,7 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
     #[Route('/check-pdf-dirty', name: 'checkpdfdirty', methods: ['GET'])]
     public function checkPdfDirtyAction(Request $request): JsonResponse
     {
-        $printDocument = PrintAbstract::getById($request->query->getInt('id'));
+        $printDocument = PrintAbstract::getById(ParameterBagHelper::getInt($request->query, 'id'));
 
         $dirty = true;
         if ($printDocument) {
@@ -334,7 +335,7 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
 
         $returnValue = [];
 
-        $storedValues = $this->getStoredProcessingOptions($request->query->getInt('id'));
+        $storedValues = $this->getStoredProcessingOptions(ParameterBagHelper::getInt($request->query, 'id'));
 
         foreach ($options as $option) {
             $value = $option['default'];
@@ -378,7 +379,7 @@ abstract class PrintpageControllerBase extends DocumentControllerBase
     #[Route('/cancel-generation', name: 'cancelgeneration', methods: ['DELETE'])]
     public function cancelGenerationAction(Request $request): JsonResponse
     {
-        Processor::getInstance()->cancelGeneration($request->request->getInt('id'));
+        Processor::getInstance()->cancelGeneration(ParameterBagHelper::getInt($request->request, 'id'));
 
         return $this->adminJson(['success' => true]);
     }
