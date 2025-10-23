@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Pimcore\Bundle\WebToPrintBundle\Controller\Document;
 
-use Pimcore\Helper\ParameterBagHelper;
 use Exception;
 use Pimcore\Bundle\AdminBundle\Controller\Admin\Document\DocumentControllerBase;
 use Pimcore\Bundle\WebToPrintBundle\Config;
 use Pimcore\Bundle\WebToPrintBundle\Model\Document\PrintAbstract;
 use Pimcore\Bundle\WebToPrintBundle\Processor;
+use Pimcore\Helper\ParameterBagHelper;
 use Pimcore\Logger;
 use Pimcore\Model\Document;
 use Pimcore\Model\Element\ValidationException;
