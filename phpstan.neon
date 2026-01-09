@@ -1,5 +1,6 @@
 parameters:
     level: 6
+    reportUnmatchedIgnoredErrors: false
     paths:
         - src
     bootstrapFiles:
@@ -7,8 +8,16 @@ parameters:
     excludePaths:
         - '**/Processor/PdfReactor.php'
         - '**/PDFreactor.class.php'
-    checkGenericClassInNonGenericObjectType: false
-    checkMissingIterableValueType: false
+    ignoreErrors:
+        -
+            message: '#Call to method (arrayNode|children|append|integerNode|scalarNode|booleanNode|enumNode|variableNode)\(\) on an unknown class#'
+            path: src/DependencyInjection/Configuration.php
+
+        -
+            identifier: missingType.iterableValue
+
+        -
+            identifier: missingType.generics
 
 includes:
     - vendor/phpstan/phpstan-symfony/extension.neon
