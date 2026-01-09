@@ -12,11 +12,11 @@ parameters:
             message: '#Call to method (arrayNode|children|append|integerNode|scalarNode|booleanNode|enumNode|variableNode)\(\) on an unknown class#'
             path: src/DependencyInjection/Configuration.php
 
-		-
-			identifier: missingType.iterableValue
+        -
+            identifier: missingType.iterableValue
 
-		-
-			identifier: missingType.generics
+        -
+            identifier: missingType.generics
 
 includes:
     - vendor/phpstan/phpstan-symfony/extension.neon
