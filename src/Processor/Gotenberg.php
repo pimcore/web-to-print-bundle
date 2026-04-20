@@ -96,7 +96,7 @@ class Gotenberg extends Processor
                 unset($gotenbergSettings[$item]);
             }
 
-            $params = array_merge($params, $gotenbergSettings);
+            $params = array_merge($gotenbergSettings, $params);
         }
 
         $params = $params ?: $this->getDefaultOptions();
