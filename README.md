@@ -2,6 +2,19 @@
 title: Web to Print Module
 ---
 
+> [!IMPORTANT]
+> ## This Repository Has Been Archived
+>
+> This bundle has moved to the Pimcore Enterprise Edition. The GPL version is **EOL** and will no longer receive updates.
+>
+> - **Enterprise repository:** The updated and supported version is available at [ee-web-to-print-bundle](https://github.com/pimcore/ee-web-to-print-bundle) (access is granted by your Pimcore contact person when you have a valid enterprise subscription).
+> - **LTS support:** For long-term support, please use our support portal at [get.support.pimcore.com](https://get.support.pimcore.com/) (access is granted by your Pimcore contact person when you have a valid enterprise subscription).
+> - **Community support:** For community help and general questions, head over to [Pimcore Discussions](https://github.com/orgs/pimcore/discussions).
+
+
+
+
+
 # Pimcore Web to Print Module
 
 Adds the ability to create web-to-print documents in Pimcore and to convert them into a PDF.
